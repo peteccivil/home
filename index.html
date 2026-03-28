@@ -486,50 +486,90 @@
         </button>
     </div>
 
-    <script>
-    const apiKey = ""; 
+   <script>
+    // 1. INSERT YOUR API KEY HERE
+    const apiKey = "AIzaSyBf0TpKnIyYlwcAcqwo834IK_h2w0MOk8w"; 
+    
     lucide.createIcons();
+
     function toggleAIChat() {
         const container = document.getElementById('ai-chat-container');
         container.classList.toggle('active');
     }
+
+    // Allow sending message by pressing "Enter"
+    document.getElementById('ai-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') askGemini();
+    });
+
     async function askGemini() {
         const inputEl = document.getElementById('ai-input');
         const chatWindow = document.getElementById('ai-chat-window');
         const loading = document.getElementById('ai-loading');
         const query = inputEl.value.trim();
-        if (!query) return;
+
+        if (!query || !apiKey) return;
+
+        // User message UI
         const userMsg = document.createElement('div');
-        userMsg.className = "bg-slate-200 p-3 rounded-2xl rounded-tr-none text-slate-800 ml-auto max-w-[85%] border border-slate-300 text-xs font-medium text-pretty text-balance";
+        userMsg.className = "bg-slate-200 p-3 rounded-2xl rounded-tr-none text-slate-800 ml-auto max-w-[85%] border border-slate-300 text-xs font-medium mb-4";
         userMsg.textContent = query;
         chatWindow.appendChild(userMsg);
+
         inputEl.value = '';
         chatWindow.scrollTop = chatWindow.scrollHeight;
         loading.classList.remove('hidden');
-        const systemPrompt = "You are the Expert Career Counselor for Civil Engineering at PETEC. Concise, professional answers only.";
+
+        // URL for the specific model you cited
         const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`;
+
         try {
             const response = await fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    contents: [{ parts: [{ text: query }] }],
-                    systemInstruction: { parts: [{ text: systemPrompt }] }
+                    contents: [{ 
+                        role: "user", // Added role for better compatibility
+                        parts: [{ text: query }] 
+                    }],
+                    // System instructions keep the AI focused on PETEC Civil Engineering
+                    systemInstruction: { 
+                        parts: [{ text: "You are the Expert Career Counselor for Civil Engineering at PETEC. Provide concise, professional advice." }] 
+                    }
                 })
             });
+
             const data = await response.json();
             loading.classList.add('hidden');
-            if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
+
+            // Standard Google AI response parsing
+            if (data.candidates && data.candidates[0].content) {
+                const aiText = data.candidates[0].content.parts[0].text;
                 const aiMsg = document.createElement('div');
-                aiMsg.className = "bg-blue-600 p-3 rounded-2xl rounded-tl-none text-white max-w-[90%] shadow-md text-xs text-pretty text-balance";
-                aiMsg.innerHTML = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
+                // Changed text-center to text-left for better readability of technical advice
+                aiMsg.className = "bg-blue-600 p-3 rounded-2xl rounded-tl-none text-white max-w-[90%] shadow-md text-xs mb-4 text-left";
+                
+                // Convert Markdown-style bold and newlines to HTML
+                aiMsg.innerHTML = aiText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
                 chatWindow.appendChild(aiMsg);
             }
         } catch (e) {
             loading.classList.add('hidden');
+            console.error("AI Chat Error:", e);
+        }
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    } else {
+                throw new Error("Invalid Response");
+            }
+        } catch (e) {
+            loading.classList.add('hidden');
+            const errorMsg = document.createElement('div');
+            errorMsg.className = "text-[10px] text-red-500 italic text-center py-2";
+            errorMsg.textContent = "Unable to connect. Please check your API key.";
+            chatWindow.appendChild(errorMsg);
         }
         chatWindow.scrollTop = chatWindow.scrollHeight;
     }
-    </script>
+</script>
 </body>
 </html>
