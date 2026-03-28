@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Associations & Activities | Civil Engineering | PETEC</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favilogo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        
+        .associations-hero {
+            background-image: linear-gradient(rgba(0, 33, 71, 0.9), rgba(0, 33, 71, 0.8)), 
+                              url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .faceatp-accent { background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); }
+        .erace-accent { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        
+        .hover-lift { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .hover-lift:hover { transform: translateY(-10px); }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(59, 130, 246, 0.1);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        /* Table custom scroll */
+        .table-container::-webkit-scrollbar { height: 6px; }
+        .table-container::-webkit-scrollbar-track { background: #f1f1f1; }
+        .table-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        .archive-item:nth-child(even) { background-color: #f8fafc; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 selection:bg-blue-100">
+
+    <!-- Top Bar -->
+    <div class="bg-[#002147] text-white py-2 px-6 text-sm flex justify-between items-center hidden md:flex border-b border-white/5">
+        <div class="flex gap-4 items-center text-pretty">
+            <span class="flex items-center gap-1 text-[11px]"><i data-lucide="phone" class="w-3.5 h-3.5 text-blue-400"></i> +91 4637 220999</span>
+            <span class="flex items-center gap-1 font-semibold underline decoration-blue-500 underline-offset-4 tracking-tight text-[11px]">peteccivil@petengg.ac.in</span>
+        </div>
+        <div class="flex gap-4 text-[10px] font-bold uppercase tracking-widest text-pretty">
+            <a href="index.html#visit" class="hover:text-blue-400 transition">Visit Campus</a>
+            <a href="magazine.html" class="hover:text-blue-400 transition text-pretty">Department Magazine</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-20 items-center">
+            <div class="flex flex-col">
+                <a href="index.html" class="flex flex-col group text-pretty">
+                    <span class="text-xl md:text-2xl font-bold text-[#002147] uppercase leading-none tracking-tighter group-hover:text-blue-600 transition">PET Engineering College</span>
+                    <span class="text-[10px] md:text-xs font-semibold text-blue-600 uppercase tracking-[0.2em] mt-1">Department of Civil Engineering</span>
+                </a>
+            </div>
+            <div class="hidden lg:flex items-center space-x-4 font-bold text-[10px] uppercase tracking-wider text-pretty">
+                <a href="index.html" class="text-[#002147] hover:text-blue-600 transition">Home</a>
+                <a href="faculty.html" class="text-[#002147] hover:text-blue-600 transition">Faculty</a>
+                <a href="placement.html" class="text-[#002147] hover:text-blue-600 transition">Placement</a>
+                <a href="consultancy.html" class="text-[#002147] hover:text-blue-600 transition text-pretty">Consultancy</a>
+                <a href="activities.html" class="text-blue-600 border-b-2 border-blue-600 pb-1">Activities</a>
+                <a href="bvisor.html" class="bg-[#002147] text-white px-5 py-2.5 rounded-full hover:bg-blue-700 transition shadow-md">Bvisor</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="associations-hero py-32 px-4 text-white text-center relative overflow-hidden">
+        <div class="max-w-4xl mx-auto space-y-6 relative z-10 text-pretty">
+            <div class="inline-block px-4 py-1 bg-blue-500/20 border border-blue-400/30 rounded-full text-blue-300 text-[10px] font-black uppercase tracking-[0.2em]">
+                Bridging Academia and Industry
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic leading-none text-pretty">
+                Professional <br> <span class="text-blue-400">Student Chapter</span>
+            </h1>
+            <p class="text-slate-200 text-lg font-light leading-relaxed max-w-2xl mx-auto text-pretty">
+                PET Engineering College hosts the distinguished FACEAT&P student chapter, fostering relationships between future engineers and industry veterans.
+            </p>
+        </div>
+    </header>
+
+    <!-- FACEAT&P Main Content -->
+    <section id="faceatp" class="py-24 px-4 bg-white relative overflow-hidden text-pretty">
+        <div class="blob -top-20 -left-20"></div>
+        <div class="max-w-7xl mx-auto relative z-10 text-pretty">
+            <div class="flex flex-col lg:flex-row items-start gap-16 text-pretty">
+                <!-- Content -->
+                <div class="lg:w-1/2 space-y-10">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center border border-blue-100 shadow-sm overflow-hidden p-3">
+                                <img src="assets/faceatp-logo.png" alt="FACEAT&P" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='<span class=\'text-blue-600 font-black text-4xl\'>F</span>'">
+                            </div>
+                            <div>
+                                <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-[10px]">Official Charter</span>
+                                <h2 class="text-4xl font-black text-[#002147] uppercase tracking-tighter italic leading-tight">FACEAT&P</h2>
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Founded at PETEC in 2016</p>
+                            </div>
+                        </div>
+                        <div class="w-16 h-1.5 bg-blue-600 rounded-full"></div>
+                    </div>
+
+                    <div class="space-y-6 text-slate-600 text-base leading-relaxed text-pretty">
+                        <p>
+                            The <span class="font-bold text-[#002147]">FACEAT&P student Chapter</span> of PETEC was established in <span class="font-bold text-blue-600">2016</span> at PET Engineering College by the Department of Civil Engineering. It provides students with unparalleled opportunities to learn directly from industry experts, gain real-world experience, and build professional relationships with potential employers.
+                        </p>
+                        <p>
+                            The chapter organizes a variety of events throughout the year, including seminars, workshops, technical competitions, and site visits. These initiatives allow students to stay abreast of the latest trends and technologies in the construction industry while networking with licensed practitioners.
+                        </p>
+                    </div>
+
+                    <!-- Coordinator Card -->
+                    <div class="p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 flex items-center gap-6 shadow-sm">
+                        <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-lg">
+                            <i data-lucide="user-check"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-black text-[#002147] text-sm uppercase tracking-tight">Mr. V. Ruban Daniel</h4>
+                            <p class="text-[10px] text-blue-600 font-black uppercase tracking-widest">Student Chapter Coordinator</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Leadership (2023-24) -->
+                <div class="lg:w-1/2 w-full text-pretty">
+                    <div class="faceatp-accent rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden text-pretty">
+                        <div class="absolute -right-8 -top-8 opacity-10"><i data-lucide="shield" class="w-48 h-48"></i></div>
+                        <div class="relative z-10">
+                            <h3 class="text-xl font-black uppercase tracking-widest mb-6 border-b border-white/10 pb-4">Student Leadership <span class="text-blue-300 ml-2">2023-2024</span></h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center py-3 border-b border-white/5">
+                                    <span class="text-xs font-bold uppercase tracking-widest text-blue-200">President</span>
+                                    <span class="text-sm font-black uppercase">Muthu Elaiyaperumal B</span>
+                                </div>
+                                <div class="flex justify-between items-center py-3 border-b border-white/5">
+                                    <span class="text-xs font-bold uppercase tracking-widest text-blue-200">Secretary</span>
+                                    <span class="text-sm font-black uppercase">Mohamed Althaf S</span>
+                                </div>
+                                <div class="flex justify-between items-center py-3 border-b border-white/5">
+                                    <span class="text-xs font-bold uppercase tracking-widest text-blue-200">Treasurer</span>
+                                    <span class="text-sm font-black uppercase">Gokul Raj V</span>
+                                </div>
+                                <div class="pt-4">
+                                    <h5 class="text-[10px] font-black uppercase tracking-[0.3em] text-blue-300 mb-3">Office Bearers</h5>
+                                    <div class="grid grid-cols-2 gap-y-2 text-[11px] font-bold uppercase tracking-tight">
+                                        <p>Rajesh M</p>
+                                        <p>R Kuhan</p>
+                                        <p>Neel Ananth K.M</p>
+                                        <p>Asha</p>
+                                        <p>Mohamed Ismail Harith S</p>
+                                        <p>Sasitharan A</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Historical Archive Section -->
+    <section class="py-24 px-4 bg-slate-50 border-y border-slate-200 text-pretty">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 text-pretty text-balance">
+                <h2 class="text-3xl font-black text-[#002147] uppercase tracking-tighter italic">Chapter <span class="text-blue-600">History</span></h2>
+                <p class="text-slate-500 text-sm mt-1 uppercase tracking-widest font-black">Archive of Previous Student Office Bearers & In-charges</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-pretty">
+                <!-- Archive Card: 2022-23 -->
+                <div class="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm text-pretty">
+                    <h4 class="text-[#002147] font-black uppercase text-xs tracking-widest border-b border-slate-100 pb-4 mb-6">2022 - 2023</h4>
+                    <p class="text-[9px] font-black text-blue-600 uppercase mb-4">Coordinator: Mr. E. Petchimuthu</p>
+                    <ul class="text-[11px] space-y-3 font-bold text-slate-600 uppercase tracking-tight">
+                        <li class="flex justify-between"><span class="text-slate-400 font-medium italic">President</span> Ajay</li>
+                        <li class="flex justify-between text-pretty"><span class="text-slate-400 font-medium italic text-pretty">Secretary</span> Muthu Elaiyaperumal</li>
+                        <li class="flex justify-between"><span class="text-slate-400 font-medium italic">Treasurer</span> Mohamed Althaf S</li>
+                        <li class="pt-2 text-[9px] text-slate-400 text-pretty">Bearers: Sheejo J S, Satheesh C, Rajesh M, R Kuhan, Neel Ananth, Asha</li>
+                    </ul>
+                </div>
+
+                <!-- Archive Card: 2019-20 -->
+                <div class="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm text-pretty">
+                    <h4 class="text-[#002147] font-black uppercase text-xs tracking-widest border-b border-slate-100 pb-4 mb-6">2019 - 2020</h4>
+                    <p class="text-[9px] font-black text-blue-600 uppercase mb-4">Coordinator: Dr. T.M. Mohamed Usman</p>
+                    <ul class="text-[11px] space-y-3 font-bold text-slate-600 uppercase tracking-tight text-pretty">
+                        <li class="flex justify-between"><span class="text-slate-400 font-medium italic">President</span> Shahul Hameed S</li>
+                        <li class="flex justify-between"><span class="text-slate-400 font-medium italic">Secretary</span> M. Nelson</li>
+                        <li class="flex justify-between text-pretty"><span class="text-slate-400 font-medium italic">Treasurer</span> I. Mohamed Ghouse</li>
+                        <li class="pt-2 text-[9px] text-slate-400 text-pretty">Bearers: S. Surender, G. Karthika, S. Sankareshwaran, K. Sheik Mohamed, S. Inbaraj</li>
+                    </ul>
+                </div>
+
+                <!-- Archive Card: 2018-19 -->
+                <div class="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm text-pretty">
+                    <h4 class="text-[#002147] font-black uppercase text-xs tracking-widest border-b border-slate-100 pb-4 mb-6">2018 - 2019</h4>
+                    <p class="text-[9px] font-black text-blue-600 uppercase mb-4 text-pretty text-balance">Coordinators: Dr. Mohamed Usman, Mr. M. Petchikkan</p>
+                    <ul class="text-[11px] space-y-3 font-bold text-slate-600 uppercase tracking-tight text-pretty">
+                        <li class="flex justify-between"><span class="text-slate-400 font-medium italic text-pretty">President</span> Romio M.J.M</li>
+                        <li class="flex justify-between text-pretty"><span class="text-slate-400 font-medium italic text-pretty text-balance">Secretary</span> Shahul Hameed</li>
+                        <li class="flex justify-between"><span class="text-slate-400 font-medium italic">Treasurer</span> M. Nelson</li>
+                        <li class="pt-2 text-[9px] text-slate-400 text-pretty">Bearers: B. Millath, B. Pavithra, S. Surender, M. Paulcy, N. Ramachandra Prabhu</li>
+                    </ul>
+                </div>
+
+                <!-- Archive Card: 2017-18 -->
+                <div class="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm text-pretty">
+                    <h4 class="text-[#002147] font-black uppercase text-xs tracking-widest border-b border-slate-100 pb-4 mb-6">2017 - 2018</h4>
+                    <p class="text-[9px] font-black text-blue-600 uppercase mb-4">Coordinator: Dr. T.M. Mohamed Usman</p>
+                    <ul class="text-[11px] space-y-3 font-bold text-slate-600 uppercase tracking-tight text-pretty">
+                        <li class="flex justify-between text-pretty"><span class="text-slate-400 font-medium italic">President</span> K. Logeshwaran</li>
+                        <li class="flex justify-between text-pretty"><span class="text-slate-400 font-medium italic text-pretty">Secretary</span> Romio M.J.M</li>
+                        <li class="flex justify-between text-pretty"><span class="text-slate-400 font-medium italic">Treasurer</span> Shahul Hameed</li>
+                        <li class="pt-2 text-[9px] text-slate-400 text-pretty text-balance">Bearers: Amjath Abdul, Nadar Sathish, Tennis Andrews, Ramya G, Sathish A</li>
+                    </ul>
+                </div>
+
+                <!-- Founding Card: 2016-17 -->
+                <div class="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm text-pretty text-balance">
+                    <h4 class="text-[#002147] font-black uppercase text-xs tracking-widest border-b border-slate-100 pb-4 mb-6">2016 - 2017</h4>
+                    <p class="text-[9px] font-black text-blue-600 uppercase mb-4 text-pretty text-balance">Coordinator: Mr. M.K. Basheer Ahamed</p>
+                    <ul class="text-[11px] space-y-3 font-bold text-slate-600 uppercase tracking-tight text-pretty text-balance">
+                        <li class="flex justify-between text-pretty text-balance"><span class="text-slate-400 font-medium italic text-pretty text-balance">President</span> Mohamed Ribash I</li>
+                        <li class="flex justify-between text-pretty"><span class="text-slate-400 font-medium italic text-pretty">Secretary</span> Tennis Andrews S</li>
+                        <li class="flex justify-between text-pretty text-balance"><span class="text-slate-400 font-medium italic text-pretty text-balance">Treasurer</span> Romio M.J.M</li>
+                        <li class="pt-2 text-[9px] text-slate-400 text-pretty text-balance">Bearers: R. Santosh Raj, V. Saravanan, Deva Arul Jeritton, A. Satish, G. Ramya</li>
+                    </ul>
+                </div>
+
+                <!-- Proto Card: 2015-16 -->
+                <div class="bg-[#002147] p-8 rounded-[2.5rem] text-white shadow-xl text-pretty text-balance">
+                    <h4 class="text-amber-400 font-black uppercase text-xs tracking-widest border-b border-white/10 pb-4 mb-6">2015 - 2016</h4>
+                    <p class="text-[9px] font-black text-blue-400 uppercase mb-4 text-pretty text-balance">Inaugural Coordinator: Mr. M.K. Basheer Ahamed</p>
+                    <ul class="text-[11px] space-y-3 font-bold uppercase tracking-tight text-pretty text-balance">
+                        <li class="flex justify-between text-pretty text-balance"><span class="text-blue-300 font-medium italic">President</span> Balasubramanian I</li>
+                        <li class="flex justify-between text-pretty"><span class="text-blue-300 font-medium italic text-pretty text-balance">Secretary</span> G. Gajalakshmi</li>
+                        <li class="flex justify-between text-pretty text-balance"><span class="text-blue-300 font-medium italic text-pretty text-balance text-center">Treasurer</span> Pudumai Seelan S</li>
+                        <li class="pt-2 text-[9px] text-blue-400 text-pretty text-balance">Bearers: S. Ribash, Shajith, Esebella, Saranya, S. Satheesh, S. Tennis Andrews</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Event Chronicle -->
+    <section class="py-24 px-4 bg-white text-pretty text-balance">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 text-pretty text-balance">
+                <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-[10px]">Legacy of Learning</span>
+                <h2 class="text-3xl font-black text-[#002147] uppercase tracking-widest mt-2">Event Chronicle</h2>
+                <div class="w-16 h-1 bg-blue-600 mx-auto mt-4 rounded-full text-pretty"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-pretty">
+                <!-- Chronicle Item 1 -->
+                <a href="#" class="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:border-blue-300 hover:shadow-lg transition group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-600 shadow-sm group-hover:bg-blue-600 group-hover:text-white transition">
+                            <i data-lucide="video" class="w-4 h-4"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-[#002147]">Webinar Series</span>
+                    </div>
+                    <p class="mt-4 text-xs font-medium text-slate-500 italic">"Cement Manufacturing and Properties of Cement"</p>
+                </a>
+
+                <!-- Chronicle Item 2 -->
+                <a href="#" class="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:border-blue-300 hover:shadow-lg transition group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-600 shadow-sm group-hover:bg-blue-600 group-hover:text-white transition">
+                            <i data-lucide="users" class="w-4 h-4"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-[#002147]">Panel Discussion</span>
+                    </div>
+                    <p class="mt-4 text-xs font-medium text-slate-500 italic">"Concrete in 21st Century"</p>
+                </a>
+
+                <!-- Chronicle Item 3 -->
+                <a href="#" class="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:border-blue-300 hover:shadow-lg transition group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-600 shadow-sm group-hover:bg-blue-600 group-hover:text-white transition text-pretty">
+                            <i data-lucide="wrench" class="w-4 h-4"></i>
+                        </div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-[#002147] text-pretty">Technical Workshop</span>
+                    </div>
+                    <p class="mt-4 text-xs font-medium text-slate-500 italic">One Day Workshop on Total Station</p>
+                </a>
+
+                <!-- Installation Events -->
+                <div class="lg:col-span-3 grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-pretty">
+                    <div class="p-4 bg-[#002147] rounded-xl text-center">
+                        <p class="text-[9px] font-black text-blue-300 uppercase tracking-widest">Installation</p>
+                        <p class="text-[11px] font-bold text-white mt-1">FACEAT 2020</p>
+                    </div>
+                    <div class="p-4 bg-[#002147] rounded-xl text-center">
+                        <p class="text-[9px] font-black text-blue-300 uppercase tracking-widest">Installation</p>
+                        <p class="text-[11px] font-bold text-white mt-1">FACEAT 2019</p>
+                    </div>
+                    <div class="p-4 bg-[#002147] rounded-xl text-center text-pretty">
+                        <p class="text-[9px] font-black text-blue-300 uppercase tracking-widest">Installation</p>
+                        <p class="text-[11px] font-bold text-white mt-1">FACEAT 2018</p>
+                    </div>
+                    <div class="p-4 bg-[#002147] rounded-xl text-center text-pretty">
+                        <p class="text-[9px] font-black text-blue-300 uppercase tracking-widest">Installation</p>
+                        <p class="text-[11px] font-bold text-white mt-1">FACEAT 2017</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-20 px-4 text-pretty">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-pretty">
+            <div class="space-y-6">
+                <div class="w-32 h-auto mb-6 bg-white/10 p-2 rounded-xl border border-white/10 mx-auto md:mx-0">
+                    <img src="assets/college-logo.png" alt="PETEC" class="w-full h-full object-contain" onerror="this.parentElement.style.display='none'">
+                </div>
+                <h3 class="text-white font-black text-xl tracking-tighter uppercase leading-none">PET Engineering <br> College</h3>
+                <p class="text-sm font-light leading-relaxed">Quality technical education since 1998. Accredited by NAAC.</p>
+            </div>
+
+            <div class="space-y-6">
+                <h4 class="text-white font-black uppercase text-[10px] tracking-[0.2em] border-l-2 border-blue-600 pl-4">Quick Links</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="index.html" class="hover:text-blue-400 transition">Academic Programs</a></li>
+                    <li><a href="faculty.html" class="hover:text-blue-400 transition">Faculty Directory</a></li>
+                    <li><a href="consultancy.html" class="hover:text-blue-400 transition">Consultancy Cell</a></li>
+                    <li><a href="bvisor.html" class="hover:text-blue-400 transition">Bvisor Startup</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-2 space-y-6 text-pretty text-balance">
+                <h4 class="text-white font-black uppercase text-[10px] tracking-[0.2em] border-l-2 border-blue-600 pl-4">Contact Cell</h4>
+                <div class="grid md:grid-cols-2 gap-8 text-pretty">
+                    <div class="space-y-4">
+                        <p class="text-sm text-slate-300 font-bold uppercase tracking-widest text-[10px]">Email Inquiries</p>
+                        <p class="text-sm text-blue-400 underline decoration-blue-800 underline-offset-4 font-bold truncate">peteccivil@petengg.ac.in</p>
+                    </div>
+                    <div class="space-y-4 text-pretty">
+                        <p class="text-sm text-slate-300 font-bold uppercase tracking-widest text-[10px]">Campus Desk</p>
+                        <p class="text-sm font-bold text-white text-pretty">+91 4637 220999</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-slate-800 mt-16 pt-8 text-[10px] uppercase font-black tracking-widest text-center">
+            <p>&copy; 2026 Department of Civil Engineering | Association Portal</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
