@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultancy Activity | Civil Engineering | PET Engineering College</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favilogo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        
+        .hero-gradient {
+            background-image: linear-gradient(rgba(0, 33, 71, 0.9), rgba(0, 33, 71, 0.8)), 
+                              url('https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .activity-card:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+        
+        .service-card:hover { 
+            background: #ffffff;
+            box-shadow: 0 20px 40px rgba(0, 33, 71, 0.08);
+            border-color: #3b82f6;
+        }
+
+        /* Table Styling */
+        .table-wrapper {
+            max-height: 800px;
+            overflow-y: auto;
+        }
+        .table-wrapper::-webkit-scrollbar { width: 6px; height: 6px; }
+        .table-wrapper::-webkit-scrollbar-track { background: #f1f1f1; }
+        .table-wrapper::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        
+        tr:nth-child(even) { background-color: #f8fafc; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 selection:bg-blue-100">
+
+    <!-- Top Bar -->
+    <div class="bg-[#002147] text-white py-2 px-6 text-sm flex justify-between items-center hidden md:flex border-b border-white/5">
+        <div class="flex gap-4 items-center">
+            <span class="flex items-center gap-1 text-[11px]"><i data-lucide="phone" class="w-3.5 h-3.5 text-blue-400"></i> +91 4637 220999</span>
+            <span class="flex items-center gap-1 font-semibold underline decoration-blue-500 underline-offset-4 tracking-tight text-[11px]">peteccivil@petengg.ac.in</span>
+        </div>
+        <div class="flex gap-4 text-[10px] font-bold uppercase tracking-widest">
+            <a href="#inquiry" class="hover:text-blue-400 transition">Industry Inquiry</a>
+            <a href="#" class="hover:text-blue-400 transition">Alumni Portal</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-20 items-center">
+            <div class="flex flex-col">
+                <a href="index.html" class="flex flex-col group">
+                    <span class="text-xl md:text-2xl font-bold text-[#002147] uppercase leading-none tracking-tighter group-hover:text-blue-600 transition text-pretty text-balance">PET Engineering College</span>
+                    <span class="text-[10px] md:text-xs font-semibold text-blue-600 uppercase tracking-[0.2em] mt-1 text-pretty text-balance">Department of Civil Engineering</span>
+                </a>
+            </div>
+            <div class="hidden lg:flex items-center space-x-4 font-bold text-[10px] uppercase tracking-wider">
+                <a href="index.html" class="text-[#002147] hover:text-blue-600 transition">Home</a>
+                <a href="faculty.html" class="text-[#002147] hover:text-blue-600 transition">Faculty</a>
+                <a href="placement.html" class="text-[#002147] hover:text-blue-600 transition">Placement</a>
+                <a href="consultancy.html" class="text-blue-600 border-b-2 border-blue-600 pb-1">Consultancy</a>
+                <a href="bvisor.html" class="text-[#002147] hover:text-blue-600 transition">Startup</a>
+                <a href="magazine.html" class="bg-[#002147] text-white px-4 py-2 rounded-full hover:bg-blue-700 transition shadow-md">Magazine</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient py-32 px-4 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10 text-pretty">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-3/4 space-y-6">
+                    <div class="inline-block px-4 py-1 bg-amber-400/20 border border-amber-400/30 rounded-full text-amber-300 text-[10px] font-black uppercase tracking-widest text-pretty">
+                        Academic Expertise & Industrial Solutions
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic leading-none">
+                        Consultancy <br> <span class="text-amber-400 text-pretty">Activity</span>
+                    </h1>
+                    <p class="text-slate-200 text-lg font-light leading-relaxed max-w-3xl text-pretty drop-shadow-md">
+                        Bridging the gap between theoretical engineering and field execution. The department provides high-value technical assistance, structural vetting, and quality control testing for regional infrastructure developments.
+                    </p>
+                    <div class="flex gap-4 pt-4">
+                        <a href="#activity-list" class="bg-white text-[#002147] px-8 py-3.5 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-blue-50 transition shadow-xl">Activity Record</a>
+                        <a href="#inquiry" class="border border-white/40 bg-white/10 backdrop-blur-md px-8 py-3.5 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-white/20 transition">Request Services</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Faculty Coordination -->
+    <section class="py-16 px-4 bg-white border-b border-slate-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-10">
+                <h2 class="text-sm font-black text-[#002147] uppercase tracking-[0.3em]">Cell Coordination</h2>
+                <div class="w-12 h-1 bg-blue-600 mt-2 rounded-full"></div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="flex items-center gap-4 p-5 bg-slate-50 rounded-3xl border border-slate-100 activity-card text-pretty">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="user-check" class="w-5 h-5"></i></div>
+                    <div>
+                        <h4 class="font-black text-[#002147] text-[11px] uppercase tracking-tight">Mr. V. Ruban Daniel</h4>
+                        <p class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Assistant Professor</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 p-5 bg-slate-50 rounded-3xl border border-slate-100 activity-card text-pretty">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="user-check" class="w-5 h-5"></i></div>
+                    <div>
+                        <h4 class="font-black text-[#002147] text-[11px] uppercase tracking-tight">Mrs. P.V. Reshma Raj</h4>
+                        <p class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Assistant Professor</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 p-5 bg-slate-50 rounded-3xl border border-slate-100 activity-card text-pretty">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="user-check" class="w-5 h-5"></i></div>
+                    <div>
+                        <h4 class="font-black text-[#002147] text-[11px] uppercase tracking-tight">Dr. Mohamed Sahibulla S M</h4>
+                        <p class="text-[9px] text-slate-500 font-bold uppercase tracking-widest text-pretty">Assistant Professor</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Offered Section -->
+    <section id="services" class="py-24 px-4 bg-slate-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-[10px]">Technical Expertise</span>
+                <h2 class="text-4xl font-black text-[#002147] uppercase tracking-tighter italic mt-2 text-pretty">Consultancy Portfolio</h2>
+                <div class="w-16 h-1 bg-blue-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-pretty">
+                <!-- Concrete Testing -->
+                <div class="bg-white p-10 rounded-[2.5rem] border border-slate-200 service-card transition-all duration-300">
+                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-8">
+                        <i data-lucide="layers"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-[#002147] uppercase mb-4">Concrete & Materials</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-6 text-balance">Comprehensive quality assessment of structural materials including cement, aggregate, and bricks.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-xs font-bold text-slate-700 uppercase tracking-tight"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i> Cube Compressive Strength</li>
+                        <li class="flex items-center gap-3 text-xs font-bold text-slate-700 uppercase tracking-tight"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i> Paver Block & Bricks</li>
+                        <li class="flex items-center gap-3 text-xs font-bold text-slate-700 uppercase tracking-tight"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i> Steel Tensile Testing</li>
+                    </ul>
+                </div>
+
+                <!-- Soil Testing -->
+                <div class="bg-white p-10 rounded-[2.5rem] border border-slate-200 service-card transition-all duration-300">
+                    <div class="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mb-8">
+                        <i data-lucide="mountain"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-[#002147] uppercase mb-4">Geotechnical Hub</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-6 text-balance">Advanced soil investigation for foundation design and land development projects.</p>
+                    <ul class="space-y-3 text-pretty">
+                        <li class="flex items-center gap-3 text-xs font-bold text-slate-700 uppercase tracking-tight"><i data-lucide="check" class="w-4 h-4 text-amber-500"></i> Safe Bearing Capacity</li>
+                        <li class="flex items-center gap-3 text-xs font-bold text-slate-700 uppercase tracking-tight"><i data-lucide="check" class="w-4 h-4 text-amber-500"></i> Atterberg Limits & Sieve</li>
+                        <li class="flex items-center gap-3 text-xs font-bold text-slate-700 uppercase tracking-tight text-pretty"><i data-lucide="check" class="w-4 h-4 text-amber-500"></i> Proctor Compaction Test</li>
+                    </ul>
+                </div>
+
+                <!-- Vetting & Survey -->
+                <div class="bg-white p-10 rounded-[2.5rem] border border-slate-200 service-card transition-all duration-300 text-pretty">
+                    <div class="w-14 h-14 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mb-8 text-pretty">
+                        <i data-lucide="compass"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-[#002147] uppercase mb-4 text-pretty text-balance">Structural Vetting</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-6 text-pretty text-balance">Professional auditing and safety vetting for major infrastructure such as bridges and highways.</p>
+                    <ul class="space-y-3 text-pretty">
+                        <li class="flex items-center gap-3 text-xs font-bold text-slate-700 uppercase tracking-tight"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Bridge Design Vetting</li>
+                        <li class="flex items-center gap-3 text-xs font-bold text-slate-700 uppercase tracking-tight"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Total Station Surveying</li>
+                        <li class="flex items-center gap-3 text-xs font-bold text-slate-700 uppercase tracking-tight"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Road Safety Analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activity Portfolio Section (FULL LIST) -->
+    <section id="activity-list" class="py-24 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-12 text-pretty text-balance">
+                <h2 class="text-3xl font-black text-[#002147] uppercase tracking-tighter italic">Professional <span class="text-blue-600 text-pretty">Engagement Log</span></h2>
+                <p class="text-slate-500 text-sm mt-1 text-balance">A comprehensive chronological record of consultancy and technical services provided since 2014.</p>
+            </div>
+
+            <div class="bg-white rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden text-pretty">
+                <div class="table-wrapper">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-[#002147] text-white text-[10px] uppercase tracking-[0.2em] sticky top-0 z-10">
+                                <th class="p-6 font-black border-r border-white/10 w-16">S.No</th>
+                                <th class="p-6 font-black border-r border-white/10">Description of Work</th>
+                                <th class="p-6 font-black border-r border-white/10">Client</th>
+                                <th class="p-6 font-black border-r border-white/10">Type</th>
+                                <th class="p-6 font-black">Year</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-[11px] divide-y divide-slate-100 leading-relaxed">
+                            <!-- 2024-25 -->
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">1</td>
+                                <td class="p-6">Construction of Bridge across Chittar River along Venkatachalapuram to Pirancheri road (Ch.672 m) at Pirancheri Panchayat.</td>
+                                <td class="p-6 font-black text-slate-600">DRDA</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-black text-[9px] uppercase">Structural Vetting</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2024-25</td>
+                            </tr>
+                            <!-- 2023-24 -->
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">2</td>
+                                <td class="p-6">Bridge across Paraliyar River Near Mathoor Aqueduct on Mathoor to Muthalar Link Road.</td>
+                                <td class="p-6 font-black text-slate-600">DRDA</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-black text-[9px] uppercase">Structural Vetting</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2023-24</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">3</td>
+                                <td class="p-6">High level Bridge at South Vagaikulam road across Chithar river.</td>
+                                <td class="p-6 font-black text-slate-600">DRDA</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-black text-[9px] uppercase">Structural Vetting</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2023-24</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">4</td>
+                                <td class="p-6 text-pretty">High level Bridge at Karisalkulam Paruthikulam link road across Chithar river.</td>
+                                <td class="p-6 font-black text-slate-600">DRDA</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-black text-[9px] uppercase">Structural Vetting</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2023-24</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">5</td>
+                                <td class="p-6">High level Bridge at Venkadasalapuram road across Ulagamman Odai.</td>
+                                <td class="p-6 font-black text-slate-600">DRDA</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-black text-[9px] uppercase">Structural Vetting</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2023-24</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">6</td>
+                                <td class="p-6">Bridge across Devi River along Solaiseri to Senthattiyapuram Road.</td>
+                                <td class="p-6 font-black text-slate-600 text-pretty text-balance">DRDA</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-black text-[9px] uppercase">Structural Vetting</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2023-24</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">7</td>
+                                <td class="p-6">Bridge across Paraliyar River Near Malavilai Church on Chenkody Road.</td>
+                                <td class="p-6 font-black text-slate-600 text-pretty text-balance">DRDA</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-black text-[9px] uppercase">Structural Vetting</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2023-24</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">8</td>
+                                <td class="p-6">Bridge across Karuppanadhi River along Thirikoodapuram to Periyanayagi Kovil Road.</td>
+                                <td class="p-6 font-black text-slate-600 text-pretty text-balance">DRDA</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-black text-[9px] uppercase">Structural Vetting</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2023-24</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">9</td>
+                                <td class="p-6">Bridge across Pattakulam Supply Channel along Veppankulam Link Road.</td>
+                                <td class="p-6 font-black text-slate-600">DRDA</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-black text-[9px] uppercase">Structural Vetting</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2023-24</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">10</td>
+                                <td class="p-6">Bridge across Maranthai Supply Channel along Kuruvankottai to Mayamankurichi Road.</td>
+                                <td class="p-6 font-black text-slate-600">DRDA</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-black text-[9px] uppercase">Structural Vetting</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2023-24</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">11</td>
+                                <td class="p-6">Bridge across Pattakulam Outlet Channel along Sankarankovil - Tirunelveli road.</td>
+                                <td class="p-6 font-black text-slate-600">DRDA</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full font-black text-[9px] uppercase">Structural Vetting</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2023-24</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">12</td>
+                                <td class="p-6">Road Safety Consultation and Technical Assistance.</td>
+                                <td class="p-6 font-black text-slate-600">Highway Department</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-amber-50 text-amber-700 rounded-full font-black text-[9px] uppercase text-center">Technical Assistance</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2023-24</td>
+                            </tr>
+                            <!-- Testing Batch -->
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">13</td>
+                                <td class="p-6 text-pretty">Cube Testing - Special grade Town Panchayat, Vaddaku Vallioor.</td>
+                                <td class="p-6 font-black text-slate-600">Town Panchayat</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2021-22</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">14</td>
+                                <td class="p-6">Concrete Cube Testing for 4S Construction.</td>
+                                <td class="p-6 font-black text-slate-600 text-pretty">4S Construction</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2022-23</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">15</td>
+                                <td class="p-6 text-pretty">Cube Testing for Sappani Alim Street Jumma Pallivasal Complex.</td>
+                                <td class="p-6 font-black text-slate-600">The Secretary</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase text-pretty text-center">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2021-22</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">16</td>
+                                <td class="p-6 text-pretty">Batch Cube Strength Analysis for Jumma Pallivasal Complex.</td>
+                                <td class="p-6 font-black text-slate-600 text-pretty">The Secretary</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase text-pretty">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2021-22</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">17</td>
+                                <td class="p-6">Coarse Aggregate Physical Property Test.</td>
+                                <td class="p-6 font-black text-slate-600 text-pretty">Town Panchayat</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2021-22</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">18</td>
+                                <td class="p-6">Fine Aggregate Grading and Silt Content Analysis.</td>
+                                <td class="p-6 font-black text-slate-600">Town Panchayat</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2022-23</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">19</td>
+                                <td class="p-6">Tensile Strength Testing of Reinforcement Steel Bars.</td>
+                                <td class="p-6 font-black text-slate-600">Town Panchayat</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2022-23</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">20</td>
+                                <td class="p-6">Soil Property Investigation for Municipal Works.</td>
+                                <td class="p-6 font-black text-slate-600">Town Panchayat</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase text-pretty text-center">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2022-23</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">21</td>
+                                <td class="p-6">Sub-surface Soil Analysis and SBC Report.</td>
+                                <td class="p-6 font-black text-slate-600">Mr. R. Essaki Muthu</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2022-23</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">22</td>
+                                <td class="p-6">Standard Cube Compression Testing.</td>
+                                <td class="p-6 font-black text-slate-600">Sindu</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2019-20</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">23</td>
+                                <td class="p-6">Quality Validation of Concrete Mixes.</td>
+                                <td class="p-6 font-black text-slate-600">Emerging Malabar</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2020-21</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">24</td>
+                                <td class="p-6">Paver Block Load Bearing Strength Test.</td>
+                                <td class="p-6 font-black text-slate-600">Blue Metal Company</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2020-21</td>
+                            </tr>
+                            <!-- Ramco Batch -->
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">25-28</td>
+                                <td class="p-6 text-pretty">Series of Concrete Strength Validation tests for cement grade assessment.</td>
+                                <td class="p-6 font-black text-slate-600">Ramco Cement</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase text-pretty text-center">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2019-20</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">29-32</td>
+                                <td class="p-6">Institutional Material Testing Series (Cube Testing).</td>
+                                <td class="p-6 font-black text-slate-600">Ramco Cement</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase text-pretty">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2018-19</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">33</td>
+                                <td class="p-6">Road Safety Measure Implementation Audit (Meloor/Keloor).</td>
+                                <td class="p-6 font-black text-slate-600 text-pretty text-balance">Highway Department</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-amber-50 text-amber-700 rounded-full font-black text-[9px] uppercase text-pretty text-center">Technical Assistance</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2018-19</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">34</td>
+                                <td class="p-6">Concrete Cube Compression Validation Batch.</td>
+                                <td class="p-6 font-black text-slate-600">Ramco Cement</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2018-19</td>
+                            </tr>
+                            <!-- Legacy Batch 2014-15 -->
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">35-36</td>
+                                <td class="p-6 text-pretty">Cube Testing for Ashoka Textiles and Arc Builders, Vallioor.</td>
+                                <td class="p-6 font-black text-slate-600 text-pretty">Institutional Clients</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase text-pretty">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2014-15</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">37-41</td>
+                                <td class="p-6 text-pretty">Brick Quality and Absorption Batch Testing for T.Chidambaram.</td>
+                                <td class="p-6 font-black text-slate-600 text-pretty">Private Clients</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase text-pretty">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2014-15</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-[#002147]">42</td>
+                                <td class="p-6 text-pretty">Final Validation Cube Testing for Site Arc Builders.</td>
+                                <td class="p-6 font-black text-slate-600">Arc Builders</td>
+                                <td class="p-6"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full font-black text-[9px] uppercase">Property Testing</span></td>
+                                <td class="p-6 font-bold text-[#002147]">2014-15</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- General Info Footer -->
+                <div class="p-8 bg-slate-50 border-t border-slate-100 text-center">
+                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 italic">
+                        All technical records are maintained as per institutional protocols and authenticated by the respective Faculty In-charges.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Request for Consultancy Section -->
+    <section id="inquiry" class="py-24 px-4 bg-slate-50">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row border border-slate-200 text-pretty">
+                <div class="md:w-1/3 bg-[#002147] p-12 text-white flex flex-col justify-between">
+                    <div class="space-y-6">
+                        <i data-lucide="mail-plus" class="w-12 h-12 text-blue-400"></i>
+                        <h3 class="text-2xl font-black uppercase tracking-tight text-pretty">Work With <br> Our Cell</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed font-medium">For official laboratory testing, structural audits, or technical vetting requests.</p>
+                    </div>
+                    <div class="mt-12 space-y-2">
+                        <p class="text-[10px] font-black uppercase text-blue-400 tracking-widest">Official Contact</p>
+                        <p class="text-sm font-bold text-pretty">+91 4637 220999</p>
+                    </div>
+                </div>
+                <div class="md:w-2/3 p-12 text-pretty">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-pretty">
+                            <div class="space-y-2 text-pretty">
+                                <label class="text-[9px] font-black uppercase text-slate-400 tracking-widest ml-1">Client Name</label>
+                                <input type="text" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm" placeholder="Organization / Name">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[9px] font-black uppercase text-slate-400 tracking-widest ml-1">Nature of Work</label>
+                                <select class="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm">
+                                    <option>Material Testing</option>
+                                    <option>Soil Investigation</option>
+                                    <option>Structural Vetting</option>
+                                    <option>Surveying</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[9px] font-black uppercase text-slate-400 tracking-widest ml-1 text-pretty">Project Details</label>
+                            <textarea rows="4" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm" placeholder="Describe the scope of testing required..."></textarea>
+                        </div>
+                        <button type="button" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-black uppercase text-xs tracking-widest transition shadow-lg text-pretty">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategic Clients Logo Bar -->
+    <section class="py-16 px-4 bg-white text-pretty">
+        <div class="max-w-7xl mx-auto text-center opacity-40 grayscale">
+            <div class="flex flex-wrap justify-center gap-12 md:gap-24 items-center text-pretty">
+                <span class="text-xl font-black italic uppercase tracking-tighter text-[#002147]">DRDA</span>
+                <span class="text-xl font-black italic uppercase tracking-tighter text-[#002147] text-pretty">Highway Dept</span>
+                <span class="text-xl font-black italic uppercase tracking-tighter text-[#002147]">RAMCO</span>
+                <span class="text-xl font-black italic uppercase tracking-tighter text-[#002147]">Town Panchayat</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Synced with index.html) -->
+    <footer class="bg-slate-900 text-slate-400 py-20 px-4 text-pretty">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-pretty">
+            <div class="space-y-6">
+                <div class="w-32 h-auto mb-6 bg-white/10 p-2 rounded-xl border border-white/10">
+                    <img src="assets/college-logo.png" alt="PETEC" class="w-full h-full object-contain" onerror="this.parentElement.style.display='none'">
+                </div>
+                <h3 class="text-white font-black text-xl tracking-tighter uppercase leading-none text-pretty">PET Engineering <br> College</h3>
+                <p class="text-sm font-light leading-relaxed">Quality technical education since 1998. Accredited by NAAC.</p>
+            </div>
+
+            <div class="space-y-6">
+                <h4 class="text-white font-black uppercase text-[10px] tracking-[0.2em] border-l-2 border-blue-600 pl-4 text-pretty">Quick Links</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="index.html" class="hover:text-blue-400 transition">Academics</a></li>
+                    <li><a href="faculty.html" class="hover:text-blue-400 transition">Faculty Directory</a></li>
+                    <li><a href="consultancy.html" class="hover:text-blue-400 transition">Consultancy Cell</a></li>
+                    <li><a href="magazine.html" class="hover:text-blue-400 transition">Department Magazine</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-2 space-y-6">
+                <h4 class="text-white font-black uppercase text-[10px] tracking-[0.2em] border-l-2 border-blue-600 pl-4 text-pretty text-balance">Inquiries</h4>
+                <div class="grid md:grid-cols-2 gap-8 text-pretty text-balance">
+                    <div class="space-y-4">
+                        <p class="text-sm text-slate-300 font-bold uppercase tracking-widest text-[10px]">Email Inquiries</p>
+                        <p class="text-sm text-blue-400 underline decoration-blue-800 underline-offset-4 font-bold truncate text-pretty">peteccivil@petengg.ac.in</p>
+                    </div>
+                    <div class="space-y-4 text-pretty">
+                        <p class="text-sm text-slate-300 font-bold uppercase tracking-widest text-[10px]">Official Contact</p>
+                        <p class="text-sm font-bold text-white text-pretty">+91 4637 220999</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-slate-800 mt-16 pt-8 text-[10px] uppercase font-black tracking-widest text-pretty text-center">
+            <p>&copy; 2026 Department of Civil Engineering | Consultancy Portal</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
