@@ -525,7 +525,7 @@
      * Paste your Gemini API Key between the quotes below.
      * Get a key at: https://aistudio.google.com/
      */
-    const apiKey = "AIzaSyCe7lsMMyFE0gzY06ASPjMc150CU2szVWo"; 
+    const apiKey = "YOUR_API_KEY_HERE"; 
     
     let activeTool = null;
 
@@ -589,8 +589,9 @@
             return "Configuration Error: Please add your Gemini API Key in the script section to use AI features on GitHub.";
         }
 
+        // Using v1beta for better model compatibility on GitHub hosting
         const model = "gemini-1.5-flash"; 
-        const url = `https://generativelanguage.googleapis.com/v1/models/${model}:generateContent?key=${apiKey}`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
         
         let retries = 3;
         while (retries >= 0) {
