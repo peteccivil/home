@@ -139,8 +139,8 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about-us" class="py-24 px-4 bg-white">
+    <!-- About Section, Mission & Vision -->
+    <section id="about-us" class="py-24 px-4 bg-white relative overflow-hidden">
         <div class="max-w-7xl mx-auto">
             <div class="mb-20 max-w-5xl">
                 <div class="space-y-4 mb-8">
@@ -173,10 +173,15 @@
                     </ul>
                 </div>
 
-                <div class="bg-[#002147] p-10 rounded-[2.5rem] text-white shadow-2xl flex flex-col justify-center">
-                    <h3 class="text-blue-400 font-black uppercase tracking-[0.3em] text-[10px] mb-8">Our Vision</h3>
-                    <p class="text-2xl font-bold leading-tight italic">"To be a centre of excellence in civil engineering and contribute to environmental preservation and overall sustainable development."</p>
-                    <div class="mt-12 h-1 w-12 bg-blue-500 rounded-full"></div>
+                <div class="bg-[#002147] p-10 rounded-[2.5rem] text-white shadow-2xl flex flex-col justify-center relative overflow-hidden group">
+                    <div class="absolute -right-8 -top-8 opacity-10 group-hover:scale-110 transition duration-700">
+                        <i data-lucide="eye" class="w-48 h-48"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-blue-400 font-black uppercase tracking-[0.3em] text-[10px] mb-8">Our Vision</h3>
+                        <p class="text-2xl font-bold leading-tight italic">"To be a centre of excellence in civil engineering and contribute to environmental preservation and overall sustainable development."</p>
+                        <div class="mt-12 h-1 w-12 bg-blue-500 rounded-full"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -192,10 +197,10 @@
                     </div>
                     <h2 class="text-4xl lg:text-5xl font-black mb-6 tracking-tight uppercase italic text-white">MEET BVISOR</h2>
                     <p class="text-blue-50 text-base lg:text-lg font-light leading-relaxed mb-6">
-                        <span class="font-bold text-white uppercase tracking-tighter">Bvisor</span> is a civil engineering startup by the Department of Civil Engineering, PET Engineering College. We bridge the gap between academia and industry.
+                        <span class="font-bold text-white uppercase tracking-tighter">Bvisor</span> is a civil engineering startup by the Department of Civil Engineering, PET Engineering College. We bridge the gap between academia and industry, delivering professional-grade solutions for global infrastructure projects.
                     </p>
                     <p class="text-blue-50 text-base font-light leading-relaxed mb-8">
-                        Operating in partnership with <span class="text-blue-300 font-bold italic underline decoration-blue-500/50 underline-offset-8 uppercase tracking-wide text-sm">Al Mussiver Structural Consultants</span>, we combine faculty expertise and modern tools.
+                        Operating in partnership with <span class="text-blue-300 font-bold italic underline decoration-blue-500/50 underline-offset-8 uppercase tracking-wide text-sm">Al Mussiver Structural Consultants</span>, we combine faculty expertise and modern tools to ensure excellence and real-world training for young engineers.
                     </p>
                     <div class="flex flex-wrap gap-6 pt-6 border-t border-white/10">
                         <div class="flex items-center gap-2">
@@ -219,7 +224,7 @@
         </div>
     </section>
 
-    <!-- Student Excellence (Projects Feature) -->
+    <!-- Student Excellence (Associations) -->
     <section id="associations" class="py-24 px-4 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
@@ -231,26 +236,30 @@
             </div>
             <div class="grid lg:grid-cols-2 gap-8">
                 <!-- Erace Association -->
-                <div class="bg-slate-50 p-10 rounded-[2rem] card-shadow border-t-4 border-blue-900">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-16 h-16 bg-white border border-slate-100 rounded-xl flex items-center justify-center overflow-hidden">
-                            <img src="assets/erace-logo.png" alt="Erace" class="w-full h-full object-contain p-2" onerror="this.parentElement.innerHTML='E'">
+                <div class="bg-slate-50 p-10 rounded-[2rem] card-shadow border-t-4 border-blue-900 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 bg-white border border-slate-100 rounded-xl flex items-center justify-center overflow-hidden">
+                                <img src="assets/erace-logo.png" alt="Erace" class="w-full h-full object-contain p-2" onerror="this.parentElement.innerHTML='<span class=\'text-blue-900 font-black text-2xl\'>E</span>'">
+                            </div>
+                            <h3 class="text-2xl font-black text-[#002147] uppercase tracking-tight">Erace</h3>
                         </div>
-                        <h3 class="text-2xl font-black text-[#002147] uppercase tracking-tight">Erace</h3>
+                        <p class="text-slate-600 leading-relaxed mb-8">Our premier Department Association, fostering innovation through technical symposia, seminars, and peer knowledge sharing.</p>
                     </div>
-                    <p class="text-slate-600 leading-relaxed mb-8">Our premier Department Association, fostering innovation through technical symposia and seminars.</p>
                     <a href="activities.html#erace" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-blue-700 transition block text-center">Explore Erace Portal</a>
                 </div>
 
                 <!-- FACEAT&P Student Chapter -->
-                <div class="bg-blue-900 p-10 rounded-[2rem] card-shadow text-white">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-16 h-16 bg-white rounded-xl flex items-center justify-center overflow-hidden">
-                            <img src="assets/faceatp-logo.png" alt="FACEAT&P" class="w-full h-full object-contain p-2" onerror="this.parentElement.innerHTML='F'">
+                <div class="bg-blue-900 p-10 rounded-[2rem] card-shadow text-white flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 bg-white rounded-xl flex items-center justify-center overflow-hidden">
+                                <img src="assets/faceatp-logo.png" alt="FACEAT&P" class="w-full h-full object-contain p-2" onerror="this.parentElement.innerHTML='<span class=\'text-blue-900 font-black text-2xl\'>F</span>'">
+                            </div>
+                            <h3 class="text-2xl font-black uppercase tracking-tight">FACEAT&P Chapter</h3>
                         </div>
-                        <h3 class="text-2xl font-black uppercase tracking-tight">FACEAT&P Chapter</h3>
+                        <p class="text-blue-100 leading-relaxed mb-8">Hosting the FACEAT&P student chapter since 2016, providing students direct access to professional bodies.</p>
                     </div>
-                    <p class="text-blue-100 leading-relaxed mb-8">Hosting the FACEAT&P student chapter since 2016, providing students direct access to professional bodies.</p>
                     <a href="activities.html#faceatp" class="bg-white text-blue-900 px-6 py-3 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-slate-100 transition block text-center">Explore FACEAT&P</a>
                 </div>
             </div>
@@ -300,47 +309,48 @@
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div class="text-center group">
-                <div class="block w-full aspect-[4/5] bg-slate-200 rounded-2xl mb-4 overflow-hidden shadow-inner border border-slate-200">
+                <a href="https://petengg.ac.in/college.php?U3F2bWZySFNmTTYzcjgvZGtxSnV0dz09" target="_blank" class="block w-full aspect-[4/5] bg-slate-200 rounded-2xl mb-4 overflow-hidden shadow-inner border border-slate-200 group-hover:border-blue-400 group-hover:scale-[1.02] transition-all duration-300">
                     <img src="assets/trustee.jpg" alt="Managing Trustee" class="w-full h-full object-cover" onerror="this.style.display='none'">
                     <div class="w-full h-full flex items-center justify-center text-[10px] uppercase font-black text-slate-400 bg-slate-100 p-4">Managing Trustee</div>
-                </div>
+                </a>
                 <h4 class="text-xs font-bold text-[#002147] uppercase tracking-tight">Mr. Mohamed Farook S</h4>
                 <p class="text-[9px] text-pink-600 font-black uppercase tracking-widest">Managing Trustee</p>
             </div>
             <div class="text-center group">
-                <div class="block w-full aspect-[4/5] bg-slate-200 rounded-2xl mb-4 overflow-hidden shadow-inner border border-slate-200">
+                <a href="https://petengg.ac.in/college.php?RUZhQUtpNFg3UTIwbEdkTGhGNXlYUT09" target="_blank" class="block w-full aspect-[4/5] bg-slate-200 rounded-2xl mb-4 overflow-hidden shadow-inner border border-slate-200 group-hover:border-blue-400 group-hover:scale-[1.02] transition-all duration-300">
                     <img src="assets/secretary.jpg" alt="Secretary" class="w-full h-full object-cover" onerror="this.style.display='none'">
                     <div class="w-full h-full flex items-center justify-center text-[10px] uppercase font-black text-slate-400 bg-slate-100 p-4">Secretary</div>
-                </div>
+                </a>
                 <h4 class="text-xs font-bold text-[#002147] uppercase tracking-tight">Mr. Khaja Mohideen S</h4>
                 <p class="text-[9px] text-pink-600 font-black uppercase tracking-widest">Secretary</p>
             </div>
             <div class="text-center group">
-                <div class="block w-full aspect-[4/5] bg-slate-200 rounded-2xl mb-4 overflow-hidden shadow-inner border border-slate-200">
+                <a href="https://petengg.ac.in/college.php?Q1FSZWszN1dSRGVwNER5ODVXTGloQT09" target="_blank" class="block w-full aspect-[4/5] bg-slate-200 rounded-2xl mb-4 overflow-hidden shadow-inner border border-slate-200 group-hover:border-blue-400 group-hover:scale-[1.02] transition-all duration-300">
                     <img src="assets/treasurer.jpg" alt="Treasurer" class="w-full h-full object-cover" onerror="this.style.display='none'">
                     <div class="w-full h-full flex items-center justify-center text-[10px] uppercase font-black text-slate-400 bg-slate-100 p-4">Treasurer</div>
-                </div>
+                </a>
                 <h4 class="text-xs font-bold text-[#002147] uppercase tracking-tight">Mr. Mohamed Abdul Razak K</h4>
                 <p class="text-[9px] text-pink-600 font-black uppercase tracking-widest">Treasurer</p>
             </div>
             <div class="text-center group">
-                <div class="block w-full aspect-[4/5] bg-slate-200 rounded-2xl mb-4 overflow-hidden shadow-inner border border-slate-200">
+                <a href="https://petengg.ac.in/college.php?d2w0L3lVclRZOUkxWVZFK2ZjVTNPdz09" target="_blank" class="block w-full aspect-[4/5] bg-slate-200 rounded-2xl mb-4 overflow-hidden shadow-inner border border-slate-200 group-hover:border-blue-400 group-hover:scale-[1.02] transition-all duration-300">
                     <img src="assets/principal.jpg" alt="Principal" class="w-full h-full object-cover" onerror="this.style.display='none'">
                     <div class="w-full h-full flex items-center justify-center text-[10px] uppercase font-black text-slate-400 bg-slate-100 p-4">Principal</div>
-                </div>
+                </a>
                 <h4 class="text-xs font-bold text-[#002147] uppercase tracking-tight">Dr. Madhan Kumar K</h4>
                 <p class="text-[9px] text-pink-600 font-black uppercase tracking-widest">Principal</p>
             </div>
         </div>
     </section>
 
-    <!-- Alumni Testimonials Section -->
+    <!-- Alumni Testimonials Section (Rolling) -->
     <section id="alumni" class="py-24 px-4 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
                 <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-[10px]">Voices of Success</span>
                 <h2 class="text-3xl font-black text-[#002147] uppercase tracking-widest mt-2">Alumni Testimonials</h2>
             </div>
+            
             <div class="marquee-container py-10">
                 <div class="marquee-content gap-8">
                     <div class="w-[350px] bg-slate-50 p-8 rounded-[2rem] border border-slate-200 flex flex-col justify-between">
@@ -364,7 +374,7 @@
                             <p class="text-[9px] text-blue-600 font-bold uppercase tracking-widest">Batch 2013-17 | Urban Planner</p>
                         </div>
                     </div>
-                    <!-- Cloned for seamless scrolling -->
+                    <!-- Cloned for loop -->
                     <div class="w-[350px] bg-slate-50 p-8 rounded-[2rem] border border-slate-200 flex flex-col justify-between">
                         <p class="text-slate-600 text-sm italic leading-relaxed mb-6">"PETEC Civil provided me the foundational strength and professional ethics that helped me excel in the structural design industry."</p>
                         <div>
@@ -385,7 +395,7 @@
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             <div>
                 <h2 class="text-3xl font-black text-[#002147] mb-6 uppercase tracking-widest">Visit Department</h2>
-                <div class="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-2xl mb-8">
+                <div class="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-2xl mb-8 shadow-sm">
                     <div class="flex items-center gap-4 mb-3">
                         <i data-lucide="refresh-cw" class="w-6 h-6 text-blue-600 animate-spin-slow"></i>
                         <h4 class="font-bold text-[#002147] uppercase tracking-tight">Landmark Attraction</h4>
@@ -397,11 +407,11 @@
                     <p><i data-lucide="map-pin" class="inline w-4 h-4 mr-2 text-blue-600"></i> Vallioor, Tirunelveli - 627 117</p>
                 </div>
                 <a href="https://www.google.com/maps" target="_blank" class="mt-8 inline-flex items-center gap-2 bg-[#002147] text-white px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-blue-600 transition shadow-lg group">
-                    <i data-lucide="map"></i> Get Directions to PETEC
+                    <i data-lucide="map" class="group-hover:rotate-12 transition"></i> Get Directions to PETEC
                 </a>
             </div>
             <div class="map-container overflow-hidden bg-white shadow-xl">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4697.757915720059!2d77.63361027573511!3d8.367169891670121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b046159f6c3576b%3A0x94f49d0044a83a2d!2sDepartment%20of%20Civil%20Engineering%2C%20PETEC!5e1!3m2!1sen!2sin!4v1774725407135!5m2!1sen!2sin"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4697.757915720059!2d77.63361027573511!3d8.367169891670121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b046159f6c3576b%3A0x94f49d0044a83a2d!2sDepartment%20of%20Civil%20Engineering%2C%20PETEC!5e1!3m2!1sen!2sin!4v1774725407135!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
@@ -410,21 +420,39 @@
     <footer class="bg-slate-900 text-slate-400 py-20 px-4">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             <div class="space-y-6">
+                <div class="w-32 h-auto mb-6 bg-white/10 p-2 rounded-xl border border-white/10 mx-auto md:mx-0">
+                    <img src="assets/college-logo.png" alt="PET Engineering College" class="w-full h-full object-contain" onerror="this.parentElement.style.display='none'">
+                </div>
                 <h3 class="text-white font-black text-xl tracking-tighter uppercase leading-none">PET Engineering <br> College</h3>
-                <p class="text-sm font-light leading-relaxed">Quality technical education since 1998. Affiliated to Anna University & Approved by AICTE.</p>
+                <p class="text-sm font-light leading-relaxed">Quality technical education since 1998. Affiliated to Anna University & Approved by AICTE. Accredited by NAAC.</p>
             </div>
+
             <div class="space-y-6">
                 <h4 class="text-white font-black uppercase text-[10px] tracking-[0.2em] border-l-2 border-blue-600 pl-4">Quick Links</h4>
                 <ul class="space-y-3 text-sm font-medium">
                     <li><a href="#" class="hover:text-blue-400 transition">Academic Programs</a></li>
                     <li><a href="faculty.html" class="hover:text-blue-400 transition">Faculty Directory</a></li>
                     <li><a href="bvisor.html" class="hover:text-blue-400 transition">Bvisor Startup</a></li>
+                    <li><a href="placement.html" class="hover:text-blue-400 transition">Placement Details</a></li>
+                    <li><a href="magazine.html" class="hover:text-blue-400 transition">Department Magazine</a></li>
                 </ul>
             </div>
+
             <div class="lg:col-span-2 space-y-6">
                 <h4 class="text-white font-black uppercase text-[10px] tracking-[0.2em] border-l-2 border-blue-600 pl-4">Reach Us</h4>
-                <p class="text-sm leading-relaxed font-medium">6, Thiruchendur Road, Madapuram, Vallioor, Tirunelveli - 627 117</p>
-                <p class="text-sm text-blue-400 font-bold">peteccivil@petengg.ac.in</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <p class="text-sm text-slate-300 font-bold uppercase tracking-widest text-[10px]">Campus Address</p>
+                        <p class="text-sm leading-relaxed font-medium">6, Thiruchendur Road, Madapuram, Vallioor, Tirunelveli - 627 117</p>
+                    </div>
+                    <div class="space-y-4">
+                        <p class="text-sm text-slate-300 font-bold uppercase tracking-widest text-[10px]">Inquiries</p>
+                        <div class="space-y-2 font-bold text-white">
+                            <p class="text-sm text-blue-400 underline decoration-blue-800 underline-offset-4 tracking-tighter">peteccivil@petengg.ac.in</p>
+                            <p class="text-sm">+91 4637 220999</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="max-w-7xl mx-auto border-t border-slate-800 mt-16 pt-8 text-[10px] uppercase font-black tracking-widest">
@@ -473,7 +501,7 @@
             </div>
             <div id="ai-chat-window" class="flex-grow p-5 overflow-y-auto space-y-4 text-sm bg-slate-50">
                 <div class="bg-blue-600 p-4 rounded-2xl rounded-tl-none text-white max-w-[85%] shadow-md text-xs">
-                    Welcome! I am your ✨ <b>Career Guide</b> at PETEC Civil. Ask me about jobs, internships, or Bvisor!
+                    Welcome! I am your ✨ <b>Career Guide</b>. Ask me about Civil Engineering careers or the PETEC curriculum!
                 </div>
             </div>
             <div id="ai-loading" class="hidden px-6 py-4 bg-slate-50">
@@ -494,16 +522,14 @@
    <script>
     /**
      * GITHUB HOSTING CONFIGURATION:
-     * 1. Get a free Gemini API Key at: https://aistudio.google.com/
-     * 2. Insert your key below between the quotes.
-     * 3. NOTE: Placing your key here is fine for personal projects, 
-     * but be aware that it will be visible in the source code on GitHub.
+     * Paste your Gemini API Key between the quotes below.
+     * Get a key at: https://aistudio.google.com/
      */
     const apiKey = "AIzaSyCe7lsMMyFE0gzY06ASPjMc150CU2szVWo"; 
     
     let activeTool = null;
-    
-    // Safety check for Lucide icons initialization
+
+    // Fix for ReferenceError: lucide is not defined
     function initIcons() {
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
@@ -518,6 +544,11 @@
         container.classList.toggle('active');
     }
 
+    function closeModal() {
+        document.getElementById('modal-overlay').classList.add('hidden');
+        document.getElementById('modal-overlay').classList.remove('flex');
+    }
+
     function openAiTool(type) {
         const modal = document.getElementById('modal-overlay');
         const title = document.getElementById('modal-title');
@@ -530,52 +561,38 @@
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         result.classList.add('hidden');
-        document.getElementById('modal-input-container').classList.remove('hidden');
-        document.getElementById('tool-submit').classList.remove('hidden');
 
         switch(type) {
             case 'career':
                 title.innerText = "✨ Career Roadmap";
                 subtitle.innerText = "Career Path Visualizer";
                 label.innerText = "Which role are you interested in?";
-                input.placeholder = "e.g., Structural Engineer, Construction Manager, Urban Planner...";
+                input.placeholder = "e.g., Structural Engineer, Construction Manager...";
                 break;
             case 'projects':
                 title.innerText = "✨ Project Generator";
                 subtitle.innerText = "Innovation Idea Lab";
                 label.innerText = "Area of Interest (Optional)";
-                input.placeholder = "e.g., Sustainability, AI, Bridge Design, Waste Management...";
+                input.placeholder = "e.g., Smart Cities, Geotechnical, Sustainability...";
                 break;
             case 'rec':
                 title.innerText = "✨ Specialization Finder";
                 subtitle.innerText = "Interest Matcher";
                 label.innerText = "What do you enjoy doing?";
-                input.placeholder = "e.g., I like math and drawing, I love being outdoors at sites, I care about environment...";
+                input.placeholder = "e.g., Designing buildings, site management...";
                 break;
         }
     }
 
-    function closeModal() {
-        document.getElementById('modal-overlay').classList.add('hidden');
-        document.getElementById('modal-overlay').classList.remove('flex');
-    }
-
     async function callGemini(query, systemPrompt) {
-        // Validation for GitHub users
-        if (apiKey === "YOUR_GEMINI_API_KEY_HERE" || !apiKey) {
+        if (apiKey === "YOUR_API_KEY_HERE" || !apiKey) {
             return "Configuration Error: Please add your Gemini API Key in the script section to use AI features on GitHub.";
         }
 
-        /**
-         * We use 'gemini-1.5-flash' for GitHub hosting as it is stable.
-         * The 'gemini-2.5-flash-preview-09-2025' is used only for the Canvas playground.
-         */
-        const modelName = "gemini-1.5-flash"; 
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+        const model = "gemini-1.5-flash"; 
+        const url = `https://generativelanguage.googleapis.com/v1/models/${model}:generateContent?key=${apiKey}`;
         
-        let retries = 5;
-        let delay = 1000;
-
+        let retries = 3;
         while (retries >= 0) {
             try {
                 const response = await fetch(url, {
@@ -584,26 +601,22 @@
                     body: JSON.stringify({
                         contents: [{ 
                             role: "user",
-                            parts: [{ text: query }] 
-                        }],
-                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                            parts: [{ text: `Instructions: ${systemPrompt}\n\nUser Input: ${query}` }] 
+                        }]
                     })
                 });
 
                 if (!response.ok) {
-                    const errData = await response.json();
-                    throw new Error(errData.error?.message || "API call failed");
+                    const errorData = await response.json();
+                    throw new Error(errorData.error?.message || "API call failed");
                 }
 
                 const data = await response.json();
-                const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-                if (text) return text;
-                throw new Error("Empty Response from AI");
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response received.";
             } catch (e) {
-                if (retries === 0) return `Error: ${e.message}. Please check your API key and connection.`;
-                await new Promise(resolve => setTimeout(resolve, delay));
-                delay *= 2;
+                if (retries === 0) return `Connection Error: ${e.message}`;
                 retries--;
+                await new Promise(r => setTimeout(r, 1000));
             }
         }
     }
@@ -612,28 +625,23 @@
         const input = document.getElementById('tool-input').value.trim();
         const loading = document.getElementById('tool-loading');
         const resultDiv = document.getElementById('tool-result');
-        const submitBtn = document.getElementById('tool-submit');
-        
         loading.classList.remove('hidden');
         resultDiv.classList.add('hidden');
-        submitBtn.classList.add('hidden');
         
         let systemPrompt = "";
-        let userQuery = input || "General suggestion";
-
         switch(activeTool) {
             case 'career':
-                systemPrompt = "You are an expert Civil Engineering Career Coach. Create a step-by-step career roadmap for the requested role, including required skills, certifications, and job hierarchy. Use bold for key terms.";
+                systemPrompt = "Create a detailed career roadmap for this role in civil engineering.";
                 break;
             case 'projects':
-                systemPrompt = "You are a Research Mentor at PETEC. Generate 3 innovative final-year project titles and brief abstracts for Civil Engineering based on the user's interest. Use bold for titles.";
+                systemPrompt = "Suggest 3 innovative final-year project ideas for civil engineering based on this interest.";
                 break;
             case 'rec':
-                systemPrompt = "You are an Academic Advisor. Based on the student's interests, recommend 2 civil engineering sub-disciplines and explain why they fit. Be encouraging.";
+                systemPrompt = "Recommend specific civil engineering specializations based on these interests.";
                 break;
         }
 
-        const aiResponse = await callGemini(userQuery, systemPrompt);
+        const aiResponse = await callGemini(input || "General info", systemPrompt);
         
         loading.classList.add('hidden');
         resultDiv.classList.remove('hidden');
@@ -645,25 +653,22 @@
         const chatWindow = document.getElementById('ai-chat-window');
         const loading = document.getElementById('ai-loading');
         const query = inputEl.value.trim();
-
         if (!query) return;
 
         const userMsg = document.createElement('div');
-        userMsg.className = "bg-slate-200 p-4 rounded-2xl rounded-tr-none text-slate-800 ml-auto max-w-[85%] border border-slate-300 text-xs font-medium mb-4";
+        userMsg.className = "bg-slate-200 p-3 rounded-2xl ml-auto max-w-[85%] text-xs mb-4 text-slate-800 font-medium";
         userMsg.textContent = query;
         chatWindow.appendChild(userMsg);
 
         inputEl.value = '';
-        chatWindow.scrollTop = chatWindow.scrollHeight;
         loading.classList.remove('hidden');
+        chatWindow.scrollTop = chatWindow.scrollHeight;
 
-        const systemPrompt = "You are the Career Desk Assistant at PET Engineering College, Civil Department. You know about Bvisor startup, the Rotating Bridge landmark, Erace, and FACEAT&P. Be professional and helpful. Use bold for emphasis.";
-        
-        const aiResponse = await callGemini(query, systemPrompt);
+        const aiResponse = await callGemini(query, "You are a professional Civil Engineering Career Counselor at PET Engineering College.");
         
         loading.classList.add('hidden');
         const aiMsg = document.createElement('div');
-        aiMsg.className = "bg-blue-600 p-4 rounded-2xl rounded-tl-none text-white max-w-[90%] shadow-lg text-xs mb-4 text-left border border-white/10";
+        aiMsg.className = "bg-blue-600 p-3 rounded-2xl text-white max-w-[90%] text-xs mb-4 text-left border border-blue-500 shadow-sm";
         aiMsg.innerHTML = aiResponse.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
         chatWindow.appendChild(aiMsg);
         chatWindow.scrollTop = chatWindow.scrollHeight;
