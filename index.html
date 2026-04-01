@@ -538,16 +538,16 @@
 
                 if (!response.ok) throw new Error("API call failed");
 
-                const data = await response.json();
+                const result = await response.json();
                 loading.classList.add('hidden');
 
-                if (data.candidates && data.candidates[0].content) {
-                    const aiText = data.candidates[0].content.parts[0].text;
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (text) {
                     const aiMsg = document.createElement('div');
                     aiMsg.className = "bg-blue-600 p-3 rounded-2xl rounded-tl-none text-white max-w-[90%] shadow-md text-xs mb-4 text-left";
                     
                     // Convert Markdown basics to HTML
-                    aiMsg.innerHTML = aiText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
+                    aiMsg.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
                     chatWindow.appendChild(aiMsg);
                 }
                 chatWindow.scrollTop = chatWindow.scrollHeight;
@@ -557,7 +557,7 @@
                     loading.classList.add('hidden');
                     const errorMsg = document.createElement('div');
                     errorMsg.className = "text-[10px] text-red-500 italic text-center py-2";
-                    errorMsg.textContent = "AI Assistant currently unavailable. Please try again later.";
+                    errorMsg.textContent = "AI Assistant currently unavailable. Please check your connection and try again.";
                     chatWindow.appendChild(errorMsg);
                     chatWindow.scrollTop = chatWindow.scrollHeight;
                 }
