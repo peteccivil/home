@@ -466,15 +466,15 @@
                 </div>
                 <button onclick="toggleAIChat()" class="hover:rotate-90 transition p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
             </div>
-            <div id="ai-chat-window" class="flex-grow p-4 overflow-y-auto space-y-4 text-sm bg-slate-50 text-pretty text-balance text-center">
-                <div class="bg-blue-100 p-3 rounded-2xl rounded-tl-none text-slate-700 max-w-[85%] border border-blue-200 text-xs text-pretty text-balance text-center">
-                    Welcome! I am your ✨ <b>Career Guide</b>. How can I help you?
+            <div id="ai-chat-window" class="flex-grow p-4 overflow-y-auto space-y-4 text-sm bg-slate-50 text-pretty text-balance">
+                <div class="bg-blue-100 p-3 rounded-2xl rounded-tl-none text-slate-700 max-w-[85%] border border-blue-200 text-xs">
+                    Welcome! I am your ✨ <b>Career Guide</b>. How can I help you today?
                 </div>
             </div>
-            <div id="ai-loading" class="hidden px-6 py-4 bg-slate-50 border-t border-slate-100 text-pretty text-balance text-center">
+            <div id="ai-loading" class="hidden px-6 py-4 bg-slate-50 border-t border-slate-100">
                 <div class="dot-pulse"></div>
             </div>
-            <div class="p-4 bg-white border-t border-slate-200 flex gap-2 text-pretty text-balance">
+            <div class="p-4 bg-white border-t border-slate-200 flex gap-2">
                 <input type="text" id="ai-input" placeholder="Ask about civil engineering..." class="flex-grow p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
                 <button onclick="askGemini()" class="bg-blue-600 text-white p-3 rounded-xl hover:bg-blue-700 transition shadow-md">
                     <i data-lucide="send" class="w-5 h-5"></i>
@@ -487,8 +487,7 @@
     </div>
 
    <script>
-    // 1. INSERT YOUR API KEY HERE
-    const apiKey = "AIzaSyBf0TpKnIyYlwcAcqwo834IK_h2w0MOk8w"; 
+    const apiKey = ""; // Kept empty as per environment instructions
     
     lucide.createIcons();
 
@@ -497,7 +496,6 @@
         container.classList.toggle('active');
     }
 
-    // Allow sending message by pressing "Enter"
     document.getElementById('ai-input').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') askGemini();
     });
@@ -508,7 +506,7 @@
         const loading = document.getElementById('ai-loading');
         const query = inputEl.value.trim();
 
-        if (!query || !apiKey) return;
+        if (!query) return;
 
         // User message UI
         const userMsg = document.createElement('div');
@@ -520,55 +518,54 @@
         chatWindow.scrollTop = chatWindow.scrollHeight;
         loading.classList.remove('hidden');
 
-        // URL for the specific model you cited
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`;
+        const systemPrompt = "You are the Expert Career Counselor for Civil Engineering at PET Engineering College (PETEC). Provide concise, professional advice to students and prospects about curriculum, career paths, Bvisor startup, and industry trends.";
+        
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ 
-                        role: "user", // Added role for better compatibility
-                        parts: [{ text: query }] 
-                    }],
-                    // System instructions keep the AI focused on PETEC Civil Engineering
-                    systemInstruction: { 
-                        parts: [{ text: "You are the Expert Career Counselor for Civil Engineering at PETEC. Provide concise, professional advice." }] 
-                    }
-                })
-            });
+        let retries = 5;
+        let delay = 1000;
 
-            const data = await response.json();
-            loading.classList.add('hidden');
+        while (retries >= 0) {
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: query }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    })
+                });
 
-            // Standard Google AI response parsing
-            if (data.candidates && data.candidates[0].content) {
-                const aiText = data.candidates[0].content.parts[0].text;
-                const aiMsg = document.createElement('div');
-                // Changed text-center to text-left for better readability of technical advice
-                aiMsg.className = "bg-blue-600 p-3 rounded-2xl rounded-tl-none text-white max-w-[90%] shadow-md text-xs mb-4 text-left";
-                
-                // Convert Markdown-style bold and newlines to HTML
-                aiMsg.innerHTML = aiText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
-                chatWindow.appendChild(aiMsg);
+                if (!response.ok) throw new Error("API call failed");
+
+                const data = await response.json();
+                loading.classList.add('hidden');
+
+                if (data.candidates && data.candidates[0].content) {
+                    const aiText = data.candidates[0].content.parts[0].text;
+                    const aiMsg = document.createElement('div');
+                    aiMsg.className = "bg-blue-600 p-3 rounded-2xl rounded-tl-none text-white max-w-[90%] shadow-md text-xs mb-4 text-left";
+                    
+                    // Convert Markdown basics to HTML
+                    aiMsg.innerHTML = aiText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
+                    chatWindow.appendChild(aiMsg);
+                }
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+                return; // Success
+            } catch (e) {
+                if (retries === 0) {
+                    loading.classList.add('hidden');
+                    const errorMsg = document.createElement('div');
+                    errorMsg.className = "text-[10px] text-red-500 italic text-center py-2";
+                    errorMsg.textContent = "AI Assistant currently unavailable. Please try again later.";
+                    chatWindow.appendChild(errorMsg);
+                    chatWindow.scrollTop = chatWindow.scrollHeight;
+                }
+                await new Promise(resolve => setTimeout(resolve, delay));
+                delay *= 2;
+                retries--;
             }
-        } catch (e) {
-            loading.classList.add('hidden');
-            console.error("AI Chat Error:", e);
         }
-        chatWindow.scrollTop = chatWindow.scrollHeight;
-    } else {
-                throw new Error("Invalid Response");
-            }
-        } catch (e) {
-            loading.classList.add('hidden');
-            const errorMsg = document.createElement('div');
-            errorMsg.className = "text-[10px] text-red-500 italic text-center py-2";
-            errorMsg.textContent = "Unable to connect. Please check your API key.";
-            chatWindow.appendChild(errorMsg);
-        }
-        chatWindow.scrollTop = chatWindow.scrollHeight;
     }
 </script>
 </body>
