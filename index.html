@@ -492,7 +492,8 @@
     </div>
 
    <script>
-    const apiKey = ""; // API key is automatically provided at runtime
+    // Always keep apiKey empty string as the execution environment provides it.
+    const apiKey = ""; 
     let activeTool = null;
     
     lucide.createIcons();
@@ -545,6 +546,7 @@
     }
 
     async function callGemini(query, systemPrompt) {
+        // Use the mandatory model gemini-2.5-flash-preview-09-2025
         const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
         let retries = 5;
         let delay = 1000;
@@ -555,7 +557,10 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        contents: [{ parts: [{ text: query }] }],
+                        contents: [{ 
+                            role: "user",
+                            parts: [{ text: query }] 
+                        }],
                         systemInstruction: { parts: [{ text: systemPrompt }] }
                     })
                 });
@@ -563,7 +568,9 @@
                 if (!response.ok) throw new Error("API call failed");
 
                 const data = await response.json();
-                return data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't generate a response.";
+                const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (text) return text;
+                throw new Error("Empty Response");
             } catch (e) {
                 if (retries === 0) return "Connection error. Please try again later.";
                 await new Promise(resolve => setTimeout(resolve, delay));
