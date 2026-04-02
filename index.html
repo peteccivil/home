@@ -32,30 +32,15 @@
         .marquee-content:hover { animation-play-state: paused; }
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        #ai-chat-container {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: translateY(20px) scale(0.95);
-            opacity: 0;
-            pointer-events: none;
+        .nav-link { 
+            color: #002147; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            font-size: 10px; 
+            letter-spacing: 0.05em; 
+            transition: color 0.2s;
         }
-        #ai-chat-container.active {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-            pointer-events: all;
-        }
-        
-        /* Modal Backdrop */
-        #modal-overlay {
-            transition: opacity 0.3s ease;
-            display: none;
-        }
-        #modal-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .dot-pulse { position: relative; left: -9999px; width: 10px; height: 10px; border-radius: 5px; background-color: #3b82f6; color: #3b82f6; box-shadow: 9999px 0 0 0 #3b82f6; animation: dot-pulse 1.5s infinite linear; }
-        @keyframes dot-pulse { 0% { box-shadow: 9999px 0 0 -5px #3b82f6; } 30% { box-shadow: 9999px 0 0 2px #3b82f6; } 60%, 100% { box-shadow: 9999px 0 0 -5px #3b82f6; } }
+        .nav-link:hover { color: #2563eb; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
@@ -83,42 +68,50 @@
                     <span class="text-[10px] md:text-xs font-semibold text-blue-600 uppercase tracking-[0.2em] mt-1">Department of Civil Engineering</span>
                 </a>
             </div>
-            <div class="hidden lg:flex items-center space-x-4 font-bold text-[10px] uppercase tracking-wider">
-                <a href="#hero" class="text-blue-600">Home</a>
-                <a href="faculty.html" class="text-[#002147] hover:text-blue-600 transition">Faculty</a>
-                <a href="placement.html" class="text-[#002147] hover:text-blue-600 transition">Placement</a>
-                <a href="bvisor.html" class="text-[#002147] hover:text-blue-600 transition">Bvisor</a>
-                <a href="Consultancy.html" class="text-[#002147] hover:text-blue-600 transition">Consultancy</a>
-                <a href="labs.html" class="text-[#002147] hover:text-blue-600 transition">Labs</a>
-                <a href="faceatp.html" class="text-[#002147] hover:text-blue-600 transition">Faceatp</a>
-                <a href="magazine.html" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition shadow-md">Magazine</a>
+            <div class="hidden lg:flex items-center space-x-4">
+                <a href="bvisor.html" class="nav-link">Bvisor</a>
+                <a href="consultancy.html" class="nav-link">Consultancy</a>
+                <a href="alumni.html" class="nav-link">Alumni</a>
+                <a href="faculty.html" class="nav-link">Faculty</a>
+                <a href="labs.html" class="nav-link">Labs</a>
+                <a href="magazine.html" class="nav-link">Magazine</a>
+                <a href="erace.html" class="nav-link">Erace</a> 
+                <a href="faceatp.html" class="nav-link">Faceatp</a>
+                <a href="placement.html" class="nav-link">Placement</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="relative hero-gradient h-[650px] flex items-center justify-center text-center text-white px-4">
-        <div class="max-w-5xl">
-            <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl overflow-hidden p-2 opacity-95">
-                <img src="assets/favilogo.png" alt="Dept Logo" class="w-full h-full object-contain">
+    <section id="hero" class="relative hero-gradient h-[550px] flex items-center px-4 overflow-hidden">
+        <div class="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center gap-12">
+            <!-- Left Side: Logo -->
+            <div class="md:w-1/3 flex justify-center md:justify-end">
+                <div class="w-48 h-48 md:w-60 md:h-60 bg-white rounded-[2.5rem] flex items-center justify-center shadow-2xl overflow-hidden p-4 opacity-95">
+                    <img src="assets/favilogo.png" alt="Dept Logo" class="w-full h-full object-contain">
+                </div>
             </div>
-            <h1 class="text-4xl md:text-7xl font-black mb-4 uppercase tracking-tight leading-tight">Department of <br class="hidden md:block"> Civil Engineering</h1>
-            <p class="text-blue-400 font-bold uppercase tracking-[0.5em] mb-10 text-sm md:text-lg">Constructing Excellence</p>
             
-            <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
-                <a href="#objectives" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-md font-bold transition shadow-lg uppercase tracking-wider text-xs">Explore Programs</a>
-                <a href="magazine.html" class="w-full md:w-auto bg-white text-[#002147] hover:bg-slate-100 px-8 py-4 rounded-md font-bold transition shadow-lg uppercase tracking-wider text-xs flex items-center justify-center gap-2">
-                    <i data-lucide="book-open" class="w-4 h-4 text-blue-600"></i> Read Department Magazine
-                </a>
-                <button onclick="toggleAIChat()" class="w-full md:w-auto bg-blue-900/40 backdrop-blur-md text-white border border-white/20 hover:bg-white/10 px-8 py-4 rounded-md font-bold transition shadow-lg uppercase tracking-wider text-xs flex items-center justify-center gap-2">
-                    ✨ Ask Assistant
-                </button>
+            <!-- Right Side: Content -->
+            <div class="md:w-2/3 text-center md:text-left text-white">
+                <h1 class="text-4xl md:text-6xl font-black mb-4 uppercase tracking-tight leading-tight">Department of <br> Civil Engineering</h1>
+                <p class="text-blue-400 font-bold uppercase tracking-[0.5em] mb-8 text-sm md:text-base">Constructing Excellence</p>
+                
+                <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start items-center">
+                    <a href="#objectives" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-md font-bold transition shadow-lg uppercase tracking-wider text-xs">Explore Programs</a>
+                    <a href="student_portal.html" class="w-full md:w-auto bg-white text-[#002147] hover:bg-slate-100 px-8 py-4 rounded-md font-bold transition shadow-lg uppercase tracking-wider text-xs flex items-center justify-center gap-2">
+                        <i data-lucide="user" class="w-4 h-4 text-blue-600"></i> Student Portal
+                    </a>
+                    <a href="magazine.html" class="w-full md:w-auto bg-blue-900/40 backdrop-blur-md text-white border border-white/20 hover:bg-white/10 px-8 py-4 rounded-md font-bold transition shadow-lg uppercase tracking-wider text-xs flex items-center justify-center gap-2">
+                        <i data-lucide="book-open" class="w-4 h-4 text-blue-600"></i> Read Department Magazine
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Statistics Section -->
-    <section class="max-w-6xl mx-auto -mt-12 relative z-10 px-4">
+    <section class="max-w-6xl mx-auto -mt-10 relative z-10 px-4">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div class="bg-white p-6 rounded-xl shadow-xl text-center border-b-4 border-blue-600">
                 <h3 class="text-3xl font-bold text-blue-600 italic">08</h3>
@@ -139,25 +132,25 @@
         </div>
     </section>
 
-    <!-- About Section, Mission & Vision -->
-    <section id="about-us" class="py-24 px-4 bg-white relative overflow-hidden">
+    <!-- About Section -->
+    <section id="about-us" class="py-16 px-4 bg-white relative overflow-hidden">
         <div class="max-w-7xl mx-auto">
-            <div class="mb-20 max-w-5xl">
-                <div class="space-y-4 mb-8">
+            <div class="mb-12 max-w-5xl">
+                <div class="space-y-4 mb-6">
                     <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-[10px]">Institutional Legacy</span>
                     <h2 class="text-4xl font-black text-[#002147] uppercase tracking-tighter leading-none">About US</h2>
                     <div class="w-16 h-1 bg-blue-600"></div>
                 </div>
-                <div class="space-y-6 text-slate-600 text-base leading-relaxed">
+                <div class="space-y-4 text-slate-600 text-base leading-relaxed">
                     <p>The Department of Civil Engineering was established in the year <span class="font-bold text-[#002147]">2012</span> and offers an under graduate four year degree programme in B.E. The Department has got a team of experienced faculty members with commitment in and concern for the students' welfare. All the laboratories are well-equipped.</p>
                     <p>The Department trains the students in such a way to meet the demands of the job market in the construction industries. The Civil Engineering discipline includes Environmental Engineering, Structural Engineering, Construction Engineering, Geotechnical Engineering, Transportation Engineering, Water Resource Engineering, Coastal Engineering, Offshore Engineering, Geology, Atmospheric and Earth Sciences as its sub - disciplines.</p>
                 </div>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-8 items-stretch mt-16">
-                <div class="bg-slate-50 p-10 rounded-[2.5rem] border border-slate-200 space-y-8">
+            <div class="grid lg:grid-cols-2 gap-6 items-stretch">
+                <div class="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-200 space-y-6">
                     <h3 class="text-blue-600 font-black uppercase tracking-[0.3em] text-[10px]">Our Mission</h3>
-                    <ul class="space-y-6">
+                    <ul class="space-y-4">
                         <li class="flex gap-4 items-start">
                             <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 text-blue-600 font-black text-xs">01</div>
                             <p class="text-slate-600 text-xs leading-relaxed">To provide students with a broad and thorough education in civil engineering fundamentals, applications and design that prepares them for the practice of civil engineering at the professional level.</p>
@@ -173,14 +166,14 @@
                     </ul>
                 </div>
 
-                <div class="bg-[#002147] p-10 rounded-[2.5rem] text-white shadow-2xl flex flex-col justify-center relative overflow-hidden group">
+                <div class="bg-[#002147] p-8 rounded-[2.5rem] text-white shadow-2xl flex flex-col justify-center relative overflow-hidden group">
                     <div class="absolute -right-8 -top-8 opacity-10 group-hover:scale-110 transition duration-700">
                         <i data-lucide="eye" class="w-48 h-48"></i>
                     </div>
                     <div class="relative z-10">
-                        <h3 class="text-blue-400 font-black uppercase tracking-[0.3em] text-[10px] mb-8">Our Vision</h3>
+                        <h3 class="text-blue-400 font-black uppercase tracking-[0.3em] text-[10px] mb-6">Our Vision</h3>
                         <p class="text-2xl font-bold leading-tight italic">"To be a centre of excellence in civil engineering and contribute to environmental preservation and overall sustainable development."</p>
-                        <div class="mt-12 h-1 w-12 bg-blue-500 rounded-full"></div>
+                        <div class="mt-8 h-1 w-12 bg-blue-500 rounded-full"></div>
                     </div>
                 </div>
             </div>
@@ -188,18 +181,18 @@
     </section>
 
     <!-- MEET BVISOR Section -->
-    <section id="bvisor-preview" class="py-24 px-4 bg-slate-50">
+    <section id="bvisor-preview" class="py-16 px-4 bg-slate-50">
         <div class="max-w-7xl mx-auto">
             <div class="bvisor-accent rounded-[3rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row items-stretch">
-                <div class="p-10 lg:p-16 lg:w-3/5 text-white border-b lg:border-b-0 lg:border-r border-white/5">
-                    <div class="flex items-center gap-3 mb-6">
+                <div class="p-10 lg:p-14 lg:w-3/5 text-white border-b lg:border-b-0 lg:border-r border-white/5">
+                    <div class="flex items-center gap-3 mb-4">
                         <span class="bg-blue-400/20 text-blue-100 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] border border-blue-400/30">Innovation Spotlight</span>
                     </div>
                     <h2 class="text-4xl lg:text-5xl font-black mb-6 tracking-tight uppercase italic text-white">MEET BVISOR</h2>
                     <p class="text-blue-50 text-base lg:text-lg font-light leading-relaxed mb-6">
                         <span class="font-bold text-white uppercase tracking-tighter">Bvisor</span> is a civil engineering startup by the Department of Civil Engineering, PET Engineering College. We bridge the gap between academia and industry, delivering professional-grade solutions for global infrastructure projects.
                     </p>
-                    <p class="text-blue-50 text-base font-light leading-relaxed mb-8">
+                    <p class="text-blue-50 text-base font-light leading-relaxed mb-6">
                         Operating in partnership with <span class="text-blue-300 font-bold italic underline decoration-blue-500/50 underline-offset-8 uppercase tracking-wide text-sm">Al Mussiver Structural Consultants</span>, we combine faculty expertise and modern tools to ensure excellence and real-world training for young engineers.
                     </p>
                     <div class="flex flex-wrap gap-6 pt-6 border-t border-white/10">
@@ -212,10 +205,10 @@
                             <span class="text-[10px] font-semibold uppercase tracking-widest">Industry Model</span>
                         </div>
                     </div>
-                    <a href="bvisor.html" class="mt-10 px-10 py-3 bg-blue-600 text-white rounded-full font-bold text-xs uppercase tracking-widest hover:bg-blue-500 transition shadow-lg inline-block text-center">Contact Bvisor</a>
+                    <a href="bvisor.html" class="mt-8 px-10 py-3 bg-blue-600 text-white rounded-full font-bold text-xs uppercase tracking-widest hover:bg-blue-500 transition shadow-lg inline-block text-center">Contact Bvisor</a>
                 </div>
-                <div class="lg:w-2/5 bg-slate-900/40 p-12 flex flex-col items-center justify-center backdrop-blur-md text-center">
-                    <div class="w-48 h-48 bg-white rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl group hover:scale-110 transition overflow-hidden">
+                <div class="lg:w-2/5 bg-slate-900/40 p-10 flex flex-col items-center justify-center backdrop-blur-md text-center">
+                    <div class="w-40 h-40 bg-white rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-2xl group hover:scale-110 transition overflow-hidden">
                         <img src="assets/bvisor-logo.png" alt="Bvisor Logo" class="w-full h-full object-contain p-4" onerror="this.parentElement.innerHTML='<span class=\'text-blue-900 font-black text-6xl italic\'>Bv</span>'">
                     </div>
                     <h4 class="text-white font-black text-2xl tracking-[0.1em] mb-2 uppercase tracking-widest">BVISOR</h4>
@@ -224,19 +217,16 @@
         </div>
     </section>
 
-    <!-- Student Excellence (Associations) -->
-    <section id="associations" class="py-24 px-4 bg-white border-b border-slate-200">
+    <!-- Student Excellence -->
+    <section id="associations" class="py-16 px-4 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
+            <div class="text-center mb-10">
                 <h2 class="text-3xl font-black text-[#002147] mb-4 uppercase tracking-widest">Student Excellence & Leadership</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
-                <button onclick="openAiTool('projects')" class="bg-blue-50 text-blue-700 px-6 py-2 rounded-full font-bold uppercase text-[10px] tracking-widest border border-blue-200 hover:bg-blue-100 transition inline-flex items-center gap-2">
-                    ✨ Generate Project Ideas
-                </button>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
             </div>
-            <div class="grid lg:grid-cols-2 gap-8">
+            <div class="grid lg:grid-cols-2 gap-6">
                 <!-- Erace Association -->
-                <div class="bg-slate-50 p-10 rounded-[2rem] card-shadow border-t-4 border-blue-900 flex flex-col justify-between">
+                <div class="bg-slate-50 p-8 rounded-[2rem] card-shadow border-t-4 border-blue-900 flex flex-col justify-between">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
                             <div class="w-16 h-16 bg-white border border-slate-100 rounded-xl flex items-center justify-center overflow-hidden">
@@ -244,13 +234,13 @@
                             </div>
                             <h3 class="text-2xl font-black text-[#002147] uppercase tracking-tight">Erace</h3>
                         </div>
-                        <p class="text-slate-600 leading-relaxed mb-8">Our premier Department Association, fostering innovation through technical symposia, seminars, and peer knowledge sharing.</p>
+                        <p class="text-slate-600 leading-relaxed mb-6">Our premier Department Association, fostering innovation through technical symposia, seminars, and peer knowledge sharing.</p>
                     </div>
-                    <a href="activities.html#erace" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-blue-700 transition block text-center">Explore Erace Portal</a>
+                    <a href="erace.html" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-blue-700 transition block text-center">Explore Erace Portal</a>
                 </div>
 
                 <!-- FACEAT&P Student Chapter -->
-                <div class="bg-blue-900 p-10 rounded-[2rem] card-shadow text-white flex flex-col justify-between">
+                <div class="bg-blue-900 p-8 rounded-[2rem] card-shadow text-white flex flex-col justify-between">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
                             <div class="w-16 h-16 bg-white rounded-xl flex items-center justify-center overflow-hidden">
@@ -258,26 +248,21 @@
                             </div>
                             <h3 class="text-2xl font-black uppercase tracking-tight">FACEAT&P Chapter</h3>
                         </div>
-                        <p class="text-blue-100 leading-relaxed mb-8">Hosting the FACEAT&P student chapter since 2016, providing students direct access to professional bodies.</p>
+                        <p class="text-blue-100 leading-relaxed mb-6">Hosting the FACEAT&P student chapter since 2016, providing students direct access to professional bodies.</p>
                     </div>
-                    <a href="activities.html#faceatp" class="bg-white text-blue-900 px-6 py-3 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-slate-100 transition block text-center">Explore FACEAT&P</a>
+                    <a href="faceatp.html" class="bg-white text-blue-900 px-6 py-3 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-slate-100 transition block text-center">Explore FACEAT&P</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Programme Objectives (Rec Feature) -->
-    <section id="objectives" class="py-24 px-4 bg-slate-50 border-b border-slate-200">
-        <div class="max-w-7xl mx-auto text-center mb-16">
+    <!-- Programme Objectives -->
+    <section id="objectives" class="py-16 px-4 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto text-center mb-12">
             <h2 class="text-4xl font-black text-[#002147] uppercase tracking-widest">Programme Objectives</h2>
             <p class="text-slate-500 italic text-sm mt-2">PEOs - Our Commitment to Graduate Success</p>
-            <div class="mt-6">
-                <button onclick="openAiTool('rec')" class="bg-[#002147] text-white px-8 py-3 rounded-full font-bold uppercase text-[10px] tracking-widest hover:bg-blue-600 transition inline-flex items-center gap-2">
-                    ✨ Recommend My Specialization
-                </button>
-            </div>
         </div>
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
                 <i data-lucide="briefcase" class="text-blue-600 mb-6 w-8 h-8"></i>
                 <h3 class="text-blue-900 font-black text-[10px] uppercase tracking-widest mb-3">PEO 1</h3>
@@ -302,8 +287,8 @@
     </section>
 
     <!-- Leadership Messages Section -->
-    <section id="messages" class="py-20 px-4 max-w-7xl mx-auto border-b border-slate-200">
-        <div class="text-center mb-16">
+    <section id="messages" class="py-16 px-4 max-w-7xl mx-auto border-b border-slate-200">
+        <div class="text-center mb-12">
             <h2 class="text-3xl font-black text-[#002147] mb-4 uppercase tracking-wider">Leadership Messages</h2>
             <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
         </div>
@@ -343,16 +328,16 @@
         </div>
     </section>
 
-    <!-- Alumni Testimonials Section (Rolling) -->
-    <section id="alumni" class="py-24 px-4 bg-white border-b border-slate-200">
+    <!-- Alumni Testimonials Section -->
+    <section id="alumni" class="py-16 px-4 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12">
+            <div class="text-center mb-8">
                 <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-[10px]">Voices of Success</span>
                 <h2 class="text-3xl font-black text-[#002147] uppercase tracking-widest mt-2">Alumni Testimonials</h2>
             </div>
             
-            <div class="marquee-container py-10">
-                <div class="marquee-content gap-8">
+            <div class="marquee-container py-6">
+                <div class="marquee-content gap-6">
                     <div class="w-[350px] bg-slate-50 p-8 rounded-[2rem] border border-slate-200 flex flex-col justify-between">
                         <p class="text-slate-600 text-sm italic leading-relaxed mb-6">"PETEC Civil provided me the foundational strength and professional ethics that helped me excel in the structural design industry."</p>
                         <div>
@@ -384,14 +369,14 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center mt-12">
+            <div class="text-center mt-8">
                 <a href="alumni.html" class="bg-[#002147] text-white px-10 py-4 rounded-full font-black uppercase tracking-widest text-[10px] hover:bg-blue-600 transition shadow-xl">Access Alumni Portal</a>
             </div>
         </div>
     </section>
 
     <!-- Visit Us Section -->
-    <section id="visit" class="py-20 px-4 bg-slate-50">
+    <section id="visit" class="py-12 px-4 bg-slate-50">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             <div>
                 <h2 class="text-3xl font-black text-[#002147] mb-6 uppercase tracking-widest">Visit Department</h2>
@@ -411,13 +396,14 @@
                 </a>
             </div>
             <div class="map-container overflow-hidden bg-white shadow-xl">
+                <!-- Original Map Location Restored -->
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4697.757915720059!2d77.63361027573511!3d8.367169891670121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b046159f6c3576b%3A0x94f49d0044a83a2d!2sDepartment%20of%20Civil%20Engineering%2C%20PETEC!5e1!3m2!1sen!2sin!4v1774725407135!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-20 px-4">
+    <footer class="bg-slate-900 text-slate-400 py-12 px-4">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             <div class="space-y-6">
                 <div class="w-32 h-auto mb-6 bg-white/10 p-2 rounded-xl border border-white/10 mx-auto md:mx-0">
@@ -430,7 +416,7 @@
             <div class="space-y-6">
                 <h4 class="text-white font-black uppercase text-[10px] tracking-[0.2em] border-l-2 border-blue-600 pl-4">Quick Links</h4>
                 <ul class="space-y-3 text-sm font-medium">
-                    <li><a href="#" class="hover:text-blue-400 transition">Academic Programs</a></li>
+                    <li><a href="index.html" class="hover:text-blue-400 transition">Academic Programs</a></li>
                     <li><a href="faculty.html" class="hover:text-blue-400 transition">Faculty Directory</a></li>
                     <li><a href="bvisor.html" class="hover:text-blue-400 transition">Bvisor Startup</a></li>
                     <li><a href="placement.html" class="hover:text-blue-400 transition">Placement Details</a></li>
@@ -455,81 +441,12 @@
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto border-t border-slate-800 mt-16 pt-8 text-[10px] uppercase font-black tracking-widest">
+        <div class="max-w-7xl mx-auto border-t border-slate-800 mt-12 pt-8 text-[10px] uppercase font-black tracking-widest">
             <p>&copy; 2026 Department of Civil Engineering</p>
         </div>
     </footer>
 
-    <!-- AI TOOL MODAL -->
-    <div id="modal-overlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[10000] hidden items-center justify-center p-4">
-        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="bg-[#002147] p-6 text-white flex justify-between items-center">
-                <div>
-                    <h3 id="modal-title" class="text-lg font-black uppercase tracking-tight">✨ AI Smart Tool</h3>
-                    <p id="modal-subtitle" class="text-xs text-blue-200 uppercase tracking-widest font-bold mt-1">AI Assistant</p>
-                </div>
-                <button onclick="closeModal()" class="p-2 hover:bg-white/10 rounded-full transition"><i data-lucide="x"></i></button>
-            </div>
-            <div class="p-6 overflow-y-auto bg-slate-50 flex-grow">
-                <div id="modal-input-container" class="space-y-4 mb-6">
-                    <label id="modal-label" class="text-xs font-black uppercase text-slate-500 tracking-widest">Your Input</label>
-                    <textarea id="tool-input" class="w-full p-4 rounded-2xl border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm min-h-[100px]" placeholder="Tell me more..."></textarea>
-                </div>
-                <div id="tool-loading" class="hidden py-8 flex flex-col items-center gap-4">
-                    <div class="dot-pulse"></div>
-                    <p class="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em] animate-pulse">Generating your ✨ response...</p>
-                </div>
-                <div id="tool-result" class="hidden bg-white p-6 rounded-2xl border border-slate-200 text-sm leading-relaxed text-slate-700 shadow-inner"></div>
-            </div>
-            <div class="p-6 bg-white border-t border-slate-100">
-                <button id="tool-submit" onclick="runTool()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-blue-700 transition shadow-lg shadow-blue-200 flex items-center justify-center gap-2">
-                    ✨ Generate Now
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- AI CHAT WIDGET -->
-    <div class="fixed bottom-6 right-6 z-[9999] flex flex-col items-end gap-4">
-        <div id="ai-chat-container" class="w-[350px] md:w-[400px] h-[550px] bg-white rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden">
-            <div class="bg-[#002147] p-5 text-white flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <div class="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse"></div>
-                    <span class="text-[10px] font-black uppercase tracking-widest">✨ Career Desk</span>
-                </div>
-                <button onclick="toggleAIChat()" class="hover:bg-white/10 p-1.5 rounded-full transition"><i data-lucide="x" class="w-4 h-4"></i></button>
-            </div>
-            <div id="ai-chat-window" class="flex-grow p-5 overflow-y-auto space-y-4 text-sm bg-slate-50">
-                <div class="bg-blue-600 p-4 rounded-2xl rounded-tl-none text-white max-w-[85%] shadow-md text-xs">
-                    Welcome! I am your ✨ <b>Career Guide</b>. Ask me about Civil Engineering careers or the PETEC curriculum!
-                </div>
-            </div>
-            <div id="ai-loading" class="hidden px-6 py-4 bg-slate-50">
-                <div class="dot-pulse"></div>
-            </div>
-            <div class="p-4 bg-white border-t border-slate-100 flex gap-2">
-                <input type="text" id="ai-input" placeholder="Ask anything..." class="flex-grow p-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
-                <button onclick="askGemini()" class="bg-blue-600 text-white p-3 rounded-xl hover:bg-blue-700 transition shadow-md">
-                    <i data-lucide="send" class="w-5 h-5"></i>
-                </button>
-            </div>
-        </div>
-        <button onclick="toggleAIChat()" class="w-16 h-16 bg-blue-600 rounded-full shadow-2xl flex items-center justify-center text-white hover:bg-blue-700 hover:scale-110 transition border-4 border-white">
-            <i data-lucide="sparkles"></i>
-        </button>
-    </div>
-
    <script>
-    /**
-     * GITHUB HOSTING CONFIGURATION:
-     * Paste your Gemini API Key between the quotes below.
-     * Get a key at: https://aistudio.google.com/
-     */
-    const apiKey = "AIzaSyCe7lsMMyFE0gzY06ASPjMc150CU2szVWo"; 
-    
-    let activeTool = null;
-
-    // Fix for ReferenceError: lucide is not defined
     function initIcons() {
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
@@ -538,144 +455,6 @@
         }
     }
     window.onload = initIcons;
-
-    function toggleAIChat() {
-        const container = document.getElementById('ai-chat-container');
-        container.classList.toggle('active');
-    }
-
-    function closeModal() {
-        document.getElementById('modal-overlay').classList.add('hidden');
-        document.getElementById('modal-overlay').classList.remove('flex');
-    }
-
-    function openAiTool(type) {
-        const modal = document.getElementById('modal-overlay');
-        const title = document.getElementById('modal-title');
-        const subtitle = document.getElementById('modal-subtitle');
-        const input = document.getElementById('tool-input');
-        const result = document.getElementById('tool-result');
-        const label = document.getElementById('modal-label');
-        
-        activeTool = type;
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        result.classList.add('hidden');
-
-        switch(type) {
-            case 'career':
-                title.innerText = "✨ Career Roadmap";
-                subtitle.innerText = "Career Path Visualizer";
-                label.innerText = "Which role are you interested in?";
-                input.placeholder = "e.g., Structural Engineer, Construction Manager...";
-                break;
-            case 'projects':
-                title.innerText = "✨ Project Generator";
-                subtitle.innerText = "Innovation Idea Lab";
-                label.innerText = "Area of Interest (Optional)";
-                input.placeholder = "e.g., Smart Cities, Geotechnical, Sustainability...";
-                break;
-            case 'rec':
-                title.innerText = "✨ Specialization Finder";
-                subtitle.innerText = "Interest Matcher";
-                label.innerText = "What do you enjoy doing?";
-                input.placeholder = "e.g., Designing buildings, site management...";
-                break;
-        }
-    }
-
-    async function callGemini(query, systemPrompt) {
-        if (apiKey === "YOUR_API_KEY_HERE" || !apiKey) {
-            return "Configuration Error: Please add your Gemini API Key in the script section to use AI features on GitHub.";
-        }
-
-        // Using v1beta for better model compatibility on GitHub hosting
-        const model = "gemini-1.5-flash"; 
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-        
-        let retries = 3;
-        while (retries >= 0) {
-            try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ 
-                            role: "user",
-                            parts: [{ text: `Instructions: ${systemPrompt}\n\nUser Input: ${query}` }] 
-                        }]
-                    })
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error?.message || "API call failed");
-                }
-
-                const data = await response.json();
-                return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response received.";
-            } catch (e) {
-                if (retries === 0) return `Connection Error: ${e.message}`;
-                retries--;
-                await new Promise(r => setTimeout(r, 1000));
-            }
-        }
-    }
-
-    async function runTool() {
-        const input = document.getElementById('tool-input').value.trim();
-        const loading = document.getElementById('tool-loading');
-        const resultDiv = document.getElementById('tool-result');
-        loading.classList.remove('hidden');
-        resultDiv.classList.add('hidden');
-        
-        let systemPrompt = "";
-        switch(activeTool) {
-            case 'career':
-                systemPrompt = "Create a detailed career roadmap for this role in civil engineering.";
-                break;
-            case 'projects':
-                systemPrompt = "Suggest 3 innovative final-year project ideas for civil engineering based on this interest.";
-                break;
-            case 'rec':
-                systemPrompt = "Recommend specific civil engineering specializations based on these interests.";
-                break;
-        }
-
-        const aiResponse = await callGemini(input || "General info", systemPrompt);
-        
-        loading.classList.add('hidden');
-        resultDiv.classList.remove('hidden');
-        resultDiv.innerHTML = aiResponse.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
-    }
-
-    async function askGemini() {
-        const inputEl = document.getElementById('ai-input');
-        const chatWindow = document.getElementById('ai-chat-window');
-        const loading = document.getElementById('ai-loading');
-        const query = inputEl.value.trim();
-        if (!query) return;
-
-        const userMsg = document.createElement('div');
-        userMsg.className = "bg-slate-200 p-3 rounded-2xl ml-auto max-w-[85%] text-xs mb-4 text-slate-800 font-medium";
-        userMsg.textContent = query;
-        chatWindow.appendChild(userMsg);
-
-        inputEl.value = '';
-        loading.classList.remove('hidden');
-        chatWindow.scrollTop = chatWindow.scrollHeight;
-
-        const aiResponse = await callGemini(query, "You are a professional Civil Engineering Career Counselor at PET Engineering College.");
-        
-        loading.classList.add('hidden');
-        const aiMsg = document.createElement('div');
-        aiMsg.className = "bg-blue-600 p-3 rounded-2xl text-white max-w-[90%] text-xs mb-4 text-left border border-blue-500 shadow-sm";
-        aiMsg.innerHTML = aiResponse.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
-        chatWindow.appendChild(aiMsg);
-        chatWindow.scrollTop = chatWindow.scrollHeight;
-    }
-
-    document.getElementById('ai-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') askGemini(); });
 </script>
 </body>
 </html>
