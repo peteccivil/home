@@ -3,448 +3,645 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Portal | Civil Engineering | PETEC</title>
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/favilogo.png">
+    <title>PETEC | Civil Engineering Professional Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         
-        .portal-hero {
-            background-image: linear-gradient(rgba(0, 33, 71, 0.9), rgba(0, 33, 71, 0.8)), 
-                              url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=2070');
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #3b82f6;
+            --bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: #1e293b;
+            scroll-behavior: smooth;
+        }
+
+        .discipline-card {
+            height: 320px;
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .card-bg {
+            position: absolute;
+            inset: 0;
             background-size: cover;
             background-position: center;
+            transition: transform 0.5s ease, filter 0.3s ease;
+            z-index: 1;
         }
 
-        /* Interactive Pathway Cards */
-        .career-card { 
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-            cursor: pointer;
-            perspective: 1000px;
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 100%);
+            z-index: 2;
         }
-        .career-card:hover { 
-            transform: translateY(-10px); 
-            box-shadow: 0 30px 60px -12px rgba(0, 33, 71, 0.15);
+
+        .card-content {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        .pathway-overlay {
+
+        .card-details {
+            max-height: 0;
             opacity: 0;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(4px);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .career-card:hover .pathway-overlay {
+
+        .discipline-card:hover .card-details {
+            max-height: 250px;
             opacity: 1;
+            margin-top: 1rem;
         }
 
-        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-        .accordion-active .accordion-content { max-height: 500px; }
-        .accordion-active i.chevron { transform: rotate(180deg); }
-        
-        .sticky-sidebar { position: sticky; top: 100px; }
-        
-        .learning-gradient {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        .discipline-card:hover .card-bg {
+            transform: scale(1.1);
+            filter: blur(2px);
         }
 
-        .input-field {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0.75rem 1rem;
-            border-radius: 1rem;
+        .discipline-card:hover .card-content {
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+        }
+
+        .software-tag {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            color: #93c5fd;
+            display: inline-block;
+            margin: 2px;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-overlay {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
             width: 100%;
+        }
+
+        .form-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
-            font-size: 0.75rem;
-            outline: none;
             transition: all 0.3s;
         }
 
-        /* Modal Transitions */
-        #path-modal { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .modal-active { opacity: 1 !important; pointer-events: auto !important; }
-        .modal-active .modal-content { transform: scale(1) !important; }
+        .form-input:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #3b82f6;
+            outline: none;
+        }
+
+        .software-item {
+            transition: all 0.2s;
+        }
+        .software-item:hover {
+            background: rgba(37, 99, 235, 0.1);
+            transform: translateX(4px);
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 selection:bg-blue-100">
+<body>
 
     <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 flex justify-between h-20 items-center">
-            <a href="index.html" class="flex flex-col">
-                <span class="text-xl font-bold text-[#002147] uppercase tracking-tighter">PET Engineering College</span>
-                <span class="text-[10px] font-semibold text-blue-600 uppercase tracking-[0.2em]">Department of Civil Engineering</span>
+    <nav class="sticky top-0 z-40 w-full bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-2 mr-4">
+                <img src="https://img.icons8.com/external-flat-icons-inmotus-design/67/external-Engineering-engineering-flat-icons-inmotus-design-3.png" alt="PETEC Logo" class="h-9 w-auto">
+                <span class="text-xl font-bold text-slate-900 tracking-tight hidden sm:block">PETEC</span>
             </a>
-            <div class="hidden lg:flex items-center space-x-6 font-bold text-[10px] uppercase tracking-wider">
-                <a href="index.html" class="hover:text-blue-600">Home</a>
-                <a href="student_portal.html" class="text-blue-600 border-b-2 border-blue-600">Portal</a>
-                <a href="erace.html" class="hover:text-blue-600">ERACE</a>
+            
+            <div class="hidden lg:flex space-x-4 xl:space-x-5 text-[13px] font-semibold text-slate-600 uppercase tracking-tight">
+                <a href="index.html" class="nav-link text-blue-600">Home</a>
+                <a href="alumni.html" class="nav-link">Alumni</a>
+                <a href="bvisor.html" class="nav-link">Bvisor</a>
+                <a href="consultancy.html" class="nav-link">Consultancy</a>
+                <a href="erace.html" class="nav-link">Erace</a>
+                <a href="faceatp.html" class="nav-link">Faceatp</a>
+                <a href="faculty.html" class="nav-link">Faculty</a>
+                <a href="labs.html" class="nav-link">Labs</a>
+                <a href="magazine.html" class="nav-link">Magazine</a>
+                <a href="placement.html" class="nav-link">Placement</a>
+            </div>
+
+            <div class="lg:hidden">
+                <i class="fas fa-bars text-slate-600 cursor-pointer"></i>
             </div>
         </div>
     </nav>
 
-    <header class="portal-hero py-20 px-4 text-white text-center">
-        <div class="max-w-4xl mx-auto space-y-4">
-            <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter italic">Student Career & <br><span class="text-blue-400">Skill Resource Center</span></h1>
-            <p class="text-slate-300 text-sm md:text-base font-light max-w-2xl mx-auto">Your comprehensive gateway to industrial mastery, job opportunities, and professional certifications.</p>
-        </div>
-    </header>
-
-    <!-- Lifelong Learning Portal -->
-    <section class="max-w-7xl mx-auto px-4 -mt-12 relative z-20">
-        <div class="learning-gradient p-8 md:p-12 rounded-[3rem] shadow-2xl text-white flex flex-col lg:flex-row items-center gap-12 border-b-8 border-blue-800">
-            <div class="lg:w-1/2 space-y-6">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-md">
-                        <i data-lucide="graduation-cap" class="text-white"></i>
-                    </div>
-                    <span class="text-xs font-black uppercase tracking-[0.3em] text-blue-100">Lifelong Learning</span>
+    <!-- Hero Section -->
+    <section id="hero" class="relative overflow-hidden bg-white pt-16 pb-20 lg:pt-24 lg:pb-28">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 border border-blue-100">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Industry Standard Resource</span>
                 </div>
-                <h2 class="text-3xl font-black uppercase tracking-tight italic">Join the Digital Classroom</h2>
-                <p class="text-blue-100 text-sm leading-relaxed font-light">Submit your details to the verification portal. Once approved, you will receive the invite link for specialized continuous learning modules.</p>
+                <h1 class="text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+                    Architecting the <br/><span class="text-blue-600">Future of Infrastructure.</span>
+                </h1>
+                <p class="text-lg text-slate-500 max-w-lg leading-relaxed">
+                    PETEC Professional Portal: Specialized resources for Civil Engineering excellence, from BIM modeling to national infrastructure governance.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#disciplines" class="px-8 py-4 bg-blue-600 text-white rounded-xl font-bold text-center shadow-lg shadow-blue-200 hover:bg-blue-700 transition">Explore Disciplines</a>
+                    <a href="#toolkit" class="px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-xl font-bold text-center hover:bg-slate-50 transition">Career Guide</a>
+                </div>
             </div>
-
-            <div class="lg:w-1/2 w-full bg-white/10 border border-white/20 p-8 rounded-[2.5rem] backdrop-blur-md">
-                <form class="space-y-4" onsubmit="event.preventDefault();">
-                    <input type="text" placeholder="Full Name" class="input-field">
-                    <div class="grid grid-cols-2 gap-4">
-                        <input type="text" placeholder="Register No." class="input-field">
-                        <input type="email" placeholder="@petengg.ac.in" class="input-field">
-                    </div>
-                    <button class="w-full bg-white text-blue-700 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-blue-50 transition">Request Access</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Career Pathways Section -->
-    <section class="py-24 px-4 bg-white overflow-hidden">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-[10px]">Interactive Navigator</span>
-                <h2 class="text-4xl font-black text-[#002147] uppercase tracking-tighter italic mt-2">Civil Engineering Pathways</h2>
-                <p class="text-slate-500 text-xs mt-4 font-bold uppercase tracking-widest">Click any path for Role Suggestions & Suitability Insights</p>
-                <div class="w-16 h-1 bg-blue-600 mx-auto mt-6 rounded-full"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Pathway 1 -->
-                <div onclick="openPathDetails('structural')" class="bg-slate-50 p-10 rounded-[3rem] career-card relative group border border-slate-100">
-                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-blue-600 transition-colors">
-                        <i data-lucide="building-2" class="text-blue-600 group-hover:text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-black text-[#002147] uppercase mb-4">Structural <br> Engineering</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed italic">Analysis and design of skyscrapers, bridges, and offshore platforms.</p>
-                    <div class="mt-8 flex items-center gap-2 text-[10px] font-black text-blue-600 uppercase tracking-widest">
-                        Explore Insights <i data-lucide="chevron-right" class="w-3 h-3"></i>
-                    </div>
-                </div>
-
-                <!-- Pathway 2 -->
-                <div onclick="openPathDetails('environmental')" class="bg-slate-50 p-10 rounded-[3rem] career-card relative group border border-slate-100">
-                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-blue-600 transition-colors">
-                        <i data-lucide="droplets" class="text-blue-600 group-hover:text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-black text-[#002147] uppercase mb-4">Water & <br> Environmental</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed italic">Sustainable STPs, flood management, and ecological engineering.</p>
-                    <div class="mt-8 flex items-center gap-2 text-[10px] font-black text-blue-600 uppercase tracking-widest">
-                        Explore Insights <i data-lucide="chevron-right" class="w-3 h-3"></i>
-                    </div>
-                </div>
-
-                <!-- Pathway 3 -->
-                <div onclick="openPathDetails('geomatics')" class="bg-slate-50 p-10 rounded-[3rem] career-card relative group border border-slate-100">
-                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-blue-600 transition-colors">
-                        <i data-lucide="map" class="text-blue-600 group-hover:text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-black text-[#002147] uppercase mb-4">Geomatics & <br> Surveying</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed italic">Topographical mapping, GPS tracking, and spatial data analysis.</p>
-                    <div class="mt-8 flex items-center gap-2 text-[10px] font-black text-blue-600 uppercase tracking-widest">
-                        Explore Insights <i data-lucide="chevron-right" class="w-3 h-3"></i>
-                    </div>
-                </div>
-
-                <!-- Pathway 4 -->
-                <div onclick="openPathDetails('construction')" class="bg-slate-50 p-10 rounded-[3rem] career-card relative group border border-slate-100">
-                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-blue-600 transition-colors">
-                        <i data-lucide="hard-hat" class="text-blue-600 group-hover:text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-black text-[#002147] uppercase mb-4">Construction <br> Management</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed italic">Project scheduling, quality control, and large-scale site operations.</p>
-                    <div class="mt-8 flex items-center gap-2 text-[10px] font-black text-blue-600 uppercase tracking-widest">
-                        Explore Insights <i data-lucide="chevron-right" class="w-3 h-3"></i>
-                    </div>
-                </div>
-
-                <!-- Pathway 5 -->
-                <div onclick="openPathDetails('govt')" class="bg-slate-50 p-10 rounded-[3rem] career-card relative group border border-slate-100">
-                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-blue-600 transition-colors">
-                        <i data-lucide="landmark" class="text-blue-600 group-hover:text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-black text-[#002147] uppercase mb-4">Public Sector <br> & Govt.</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed italic">Administrative and technical roles in PWD, NHAI, Railways, and ISRO.</p>
-                    <div class="mt-8 flex items-center gap-2 text-[10px] font-black text-blue-600 uppercase tracking-widest">
-                        Explore Insights <i data-lucide="chevron-right" class="w-3 h-3"></i>
-                    </div>
-                </div>
-
-                <!-- Pathway 6 -->
-                <div onclick="openPathDetails('startup')" class="bg-[#002147] p-10 rounded-[3rem] career-card relative group border-none shadow-xl text-white">
-                    <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-8 shadow-lg">
-                        <i data-lucide="rocket" class="text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-black uppercase mb-4">Entrepreneurship <br> & Bvisor</h3>
-                    <p class="text-xs text-blue-200 leading-relaxed italic">Launching consultancies, 3D viz studios, and tech-driven startups.</p>
-                    <div class="mt-8 flex items-center gap-2 text-[10px] font-black text-blue-400 uppercase tracking-widest">
-                        Explore Insights <i data-lucide="chevron-right" class="w-3 h-3 text-white"></i>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Content: Resource Terminal & Sidebar -->
-    <main class="max-w-7xl mx-auto px-4 py-12 flex flex-col lg:flex-row gap-12">
-        <div class="lg:w-2/3 space-y-12">
-            <!-- Search Bar -->
             <div class="relative">
-                <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5"></i>
-                <input type="text" id="resourceSearch" onkeyup="filterResources()" placeholder="Search software or portals (e.g. Revit, NCS)..." 
-                       class="w-full pl-12 pr-4 py-4 rounded-2xl border border-slate-200 shadow-sm focus:ring-2 focus:ring-blue-600 outline-none">
+                <img src="https://images.unsplash.com/photo-1503387762-592dea58ef22?auto=format&fit=crop&q=80&w=1000" alt="Bridge Construction" class="rounded-3xl shadow-2xl z-10 relative">
+                <div class="absolute -top-6 -right-6 w-32 h-32 bg-blue-100 rounded-full blur-3xl -z-10"></div>
+                <div class="absolute -bottom-6 -left-6 w-48 h-48 bg-slate-100 rounded-full blur-3xl -z-10"></div>
             </div>
+        </div>
+    </section>
 
-            <!-- Job Portals -->
-            <section id="job-portals">
-                <h2 class="text-2xl font-black text-[#002147] uppercase tracking-tight mb-6 flex items-center gap-2">
-                    <i data-lucide="briefcase" class="text-blue-600"></i> Job & Internship Portals
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="https://www.ncs.gov.in/" target="_blank" class="p-5 bg-white rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between group hover:bg-slate-50 transition">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center font-bold">NCS</div>
-                            <h4 class="text-sm font-bold text-slate-800">NCS Portal (Govt. of India)</h4>
-                        </div>
-                        <i data-lucide="external-link" class="w-4 h-4 text-slate-300 group-hover:text-blue-600"></i>
-                    </a>
-                    <a href="https://nats.education.gov.in/" target="_blank" class="p-5 bg-white rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between group hover:bg-slate-50 transition">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center font-bold">NATS</div>
-                            <h4 class="text-sm font-bold text-slate-800">NATS Apprenticeship</h4>
-                        </div>
-                        <i data-lucide="external-link" class="w-4 h-4 text-slate-300 group-hover:text-blue-600"></i>
-                    </a>
+    <!-- Main Grid Content -->
+    <main class="max-w-7xl mx-auto px-4 space-y-12 pb-20">
+        
+        <!-- Disciplines Section (Updated Header) -->
+        <section id="disciplines" class="space-y-4">
+            <div class="flex items-end justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Engineering Disciplines and Career Opportunities</h2>
+                    <p class="text-slate-500 text-sm">Specialized tracks and professional career paths</p>
                 </div>
-            </section>
-
-            <!-- Roadmap Accordions -->
-            <section id="software-roadmap">
-                <h2 class="text-2xl font-black text-[#002147] uppercase tracking-tight mb-6">Software Mastery Roadmap</h2>
-                <div class="space-y-4">
-                    <div class="accordion-item bg-white border border-slate-200 rounded-2xl overflow-hidden">
-                        <button onclick="toggleAccordion(this)" class="w-full px-6 py-5 flex items-center justify-between hover:bg-slate-50 transition">
-                            <div class="flex items-center gap-4">
-                                <span class="text-xl">🏗️</span>
-                                <h4 class="font-black text-sm uppercase tracking-widest text-[#002147]">BIM & Digital Construction</h4>
-                            </div>
-                            <i data-lucide="chevron-down" class="chevron w-5 h-5 text-slate-400 transition-transform"></i>
-                        </button>
-                        <div class="accordion-content bg-slate-50/50 p-6 space-y-4">
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="p-4 bg-white rounded-xl border border-slate-100">
-                                    <h5 class="text-blue-600 font-bold text-xs uppercase">Autodesk Revit</h5>
-                                    <p class="text-[10px] text-slate-500">Advanced 3D/BIM modeling for complex building systems.</p>
-                                </div>
-                                <div class="p-4 bg-white rounded-xl border border-slate-100">
-                                    <h5 class="text-blue-600 font-bold text-xs uppercase">AutoCAD</h5>
-                                    <p class="text-[10px] text-slate-500">Industry-standard 2D drafting and plan detailing.</p>
-                                </div>
-                            </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+                <!-- Structural Engineering -->
+                <div class="discipline-card group" onclick="openDiscipline('structural')">
+                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1590487988256-9ed24133863e?auto=format&fit=crop&q=80&w=800')"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <h3 class="text-xl font-bold text-white mb-1"><i class="fas fa-building mr-2"></i>Structural</h3>
+                        <div class="card-details">
+                            <p class="text-slate-200 text-[10px] mb-2">Safe load paths for skyscrapers and bridges.</p>
+                            <button class="w-full py-1.5 bg-white text-slate-900 rounded text-[10px] font-bold uppercase">Detail</button>
                         </div>
                     </div>
-                    <!-- Other accordions can be added here following same pattern -->
                 </div>
-            </section>
+
+                <!-- BIM Modeler (New) -->
+                <div class="discipline-card group" onclick="openDiscipline('bim')">
+                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=800')"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <h3 class="text-xl font-bold text-white mb-1"><i class="fas fa-cube mr-2"></i>BIM Modeler</h3>
+                        <div class="card-details">
+                            <p class="text-slate-200 text-[10px] mb-2">Digital twins and collaborative 3D construction modeling.</p>
+                            <button class="w-full py-1.5 bg-white text-slate-900 rounded text-[10px] font-bold uppercase">Detail</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Government Jobs (New) -->
+                <div class="discipline-card group" onclick="openDiscipline('govt')">
+                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&q=80&w=800')"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <h3 class="text-xl font-bold text-white mb-1"><i class="fas fa-landmark mr-2"></i>Govt. Sector</h3>
+                        <div class="card-details">
+                            <p class="text-slate-200 text-[10px] mb-2">Public works, railways, and national infrastructure roles.</p>
+                            <button class="w-full py-1.5 bg-white text-slate-900 rounded text-[10px] font-bold uppercase">Detail</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Geotechnical -->
+                <div class="discipline-card group" onclick="openDiscipline('geotechnical')">
+                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=800')"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <h3 class="text-xl font-bold text-white mb-1"><i class="fas fa-mountain mr-2"></i>Geotechnical</h3>
+                        <div class="card-details">
+                            <button class="w-full py-1.5 bg-white text-slate-900 rounded text-[10px] font-bold uppercase">Detail</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transportation -->
+                <div class="discipline-card group" onclick="openDiscipline('transportation')">
+                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?auto=format&fit=crop&q=80&w=800')"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <h3 class="text-xl font-bold text-white mb-1"><i class="fas fa-road mr-2"></i>Transportation</h3>
+                        <div class="card-details">
+                            <button class="w-full py-1.5 bg-white text-slate-900 rounded text-[10px] font-bold uppercase">Detail</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Environmental -->
+                <div class="discipline-card group" onclick="openDiscipline('environmental')">
+                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&q=80&w=800')"></div>
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <h3 class="text-xl font-bold text-white mb-1"><i class="fas fa-leaf mr-2"></i>Environmental</h3>
+                        <div class="card-details">
+                            <button class="w-full py-1.5 bg-white text-slate-900 rounded text-[10px] font-bold uppercase">Detail</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Toolkit Section -->
+        <section id="toolkit" class="space-y-6">
+            <div class="text-center max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-900">Career Development Toolkit</h2>
+                <p class="text-slate-500">Essential tips to stand out in the competitive engineering job market.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <div onclick="openToolkit('linkedin')" class="cursor-pointer bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:border-blue-300 hover:shadow-md transition group">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-slate-800 flex items-center"><i class="fab fa-linkedin text-blue-600 mr-3 text-lg"></i>LinkedIn Optimization</span>
+                        <i class="fas fa-arrow-up-right-from-square text-slate-300 group-hover:text-blue-500 transition"></i>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2">Keywords, Portfolio uploads, and Networking strategies.</p>
+                </div>
+
+                <div onclick="openToolkit('placement')" class="cursor-pointer bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:border-blue-300 hover:shadow-md transition group">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-slate-800 flex items-center"><i class="fas fa-file-invoice text-blue-600 mr-3 text-lg"></i>Placement Blueprint</span>
+                        <i class="fas fa-arrow-up-right-from-square text-slate-300 group-hover:text-blue-500 transition"></i>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2">ATS friendly layouts and result-quantified descriptions.</p>
+                </div>
+
+                <div onclick="openToolkit('coverletter')" class="cursor-pointer bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:border-blue-300 hover:shadow-md transition group">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-slate-800 flex items-center"><i class="fas fa-envelope-open-text text-blue-600 mr-3 text-lg"></i>Cover Letter Strategy</span>
+                        <i class="fas fa-arrow-up-right-from-square text-slate-300 group-hover:text-blue-500 transition"></i>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2">Personalization tactics and problem-solver highlights.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Academic & Software Links -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div id="faculty-section" class="lg:col-span-2 glass-panel rounded-2xl p-6 shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg font-bold flex items-center">
+                        <i class="fas fa-graduation-cap text-blue-600 mr-2"></i>
+                        Faculty & Academic Quick Links
+                    </h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <a href="https://nptel.ac.in/courses/civil-engineering" target="_blank" class="flex items-center p-3 rounded-xl border border-slate-100 hover:border-blue-300 hover:bg-blue-50 transition-all">
+                        <div class="w-8 h-8 rounded bg-blue-100 flex items-center justify-center mr-3"><i class="fas fa-video text-blue-600 text-xs"></i></div>
+                        <span class="text-sm font-semibold">NPTEL IIT Lectures</span>
+                    </a>
+                    <a href="https://www.edx.org/learn/civil-engineering" target="_blank" class="flex items-center p-3 rounded-xl border border-slate-100 hover:border-blue-300 hover:bg-blue-50 transition-all">
+                        <div class="w-8 h-8 rounded bg-blue-100 flex items-center justify-center mr-3"><i class="fas fa-book-open text-blue-600 text-xs"></i></div>
+                        <span class="text-sm font-semibold">edX Certification</span>
+                    </a>
+                    <a href="https://www.coursera.org/browse/physical-science-and-engineering/civil-engineering" target="_blank" class="flex items-center p-3 rounded-xl border border-slate-100 hover:border-blue-300 hover:bg-blue-50 transition-all">
+                        <div class="w-8 h-8 rounded bg-blue-100 flex items-center justify-center mr-3"><i class="fas fa-university text-blue-600 text-xs"></i></div>
+                        <span class="text-sm font-semibold">Coursera Engineering</span>
+                    </a>
+                    <a href="https://www.linkedin.com/learning/topics/networking" target="_blank" class="flex items-center p-3 rounded-xl border border-slate-100 hover:border-blue-300 hover:bg-blue-50 transition-all">
+                        <div class="w-8 h-8 rounded bg-blue-100 flex items-center justify-center mr-3"><i class="fab fa-linkedin text-blue-600 text-xs"></i></div>
+                        <span class="text-sm font-semibold">LinkedIn Learning</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Software & Labs (Updated with appealing list and official links) -->
+            <div id="labs-section" class="glass-panel rounded-2xl p-6 shadow-sm">
+                <h2 class="text-lg font-bold flex items-center mb-6">
+                    <i class="fas fa-laptop-code text-blue-600 mr-2"></i>
+                    Software & Labs
+                </h2>
+                <div class="space-y-1">
+                    <a href="https://www.autodesk.com/products/revit/overview" target="_blank" class="software-item flex items-center justify-between p-2 rounded-lg border border-transparent">
+                        <span class="text-xs font-medium text-slate-700">Autodesk Revit</span>
+                        <i class="fas fa-external-link-alt text-[10px] text-blue-400"></i>
+                    </a>
+                    <a href="https://www.autodesk.com/products/navisworks/overview" target="_blank" class="software-item flex items-center justify-between p-2 rounded-lg border border-transparent">
+                        <span class="text-xs font-medium text-slate-700">Navisworks</span>
+                        <i class="fas fa-external-link-alt text-[10px] text-blue-400"></i>
+                    </a>
+                    <a href="https://www.oracle.com/industries/construction-engineering/primavera-p6/" target="_blank" class="software-item flex items-center justify-between p-2 rounded-lg border border-transparent">
+                        <span class="text-xs font-medium text-slate-700">Oracle Primavera P6</span>
+                        <i class="fas fa-external-link-alt text-[10px] text-blue-400"></i>
+                    </a>
+                    <a href="https://www.microsoft.com/en-us/microsoft-365/project/project-management-software" target="_blank" class="software-item flex items-center justify-between p-2 rounded-lg border border-transparent">
+                        <span class="text-xs font-medium text-slate-700">Microsoft Project</span>
+                        <i class="fas fa-external-link-alt text-[10px] text-blue-400"></i>
+                    </a>
+                    <a href="https://www.bentley.com/software/staad-pro/" target="_blank" class="software-item flex items-center justify-between p-2 rounded-lg border border-transparent">
+                        <span class="text-xs font-medium text-slate-700">STAAD.Pro</span>
+                        <i class="fas fa-external-link-alt text-[10px] text-blue-400"></i>
+                    </a>
+                    <a href="https://www.sketchup.com/" target="_blank" class="software-item flex items-center justify-between p-2 rounded-lg border border-transparent">
+                        <span class="text-xs font-medium text-slate-700">SketchUp</span>
+                        <i class="fas fa-external-link-alt text-[10px] text-blue-400"></i>
+                    </a>
+                    <a href="https://qgis.org/" target="_blank" class="software-item flex items-center justify-between p-2 rounded-lg border border-transparent">
+                        <span class="text-xs font-medium text-slate-700">QGIS Desktop</span>
+                        <i class="fas fa-external-link-alt text-[10px] text-blue-400"></i>
+                    </a>
+                    <a href="https://www.csiamerica.com/products/etabs" target="_blank" class="software-item flex items-center justify-between p-2 rounded-lg border border-transparent">
+                        <span class="text-xs font-medium text-slate-700">ETABS</span>
+                        <i class="fas fa-external-link-alt text-[10px] text-blue-400"></i>
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <!-- Sidebar -->
-        <aside class="lg:w-1/3 space-y-6">
-            <div class="sticky-sidebar space-y-6">
-                <div class="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
-                    <h3 class="text-sm font-black text-[#002147] uppercase tracking-widest mb-6 border-b border-slate-100 pb-4">Professional Essentials</h3>
-                    <div class="space-y-4">
-                        <a href="https://www.bis.gov.in/" target="_blank" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 transition group">
-                            <i data-lucide="file-text" class="w-5 h-5 text-blue-600"></i>
-                            <span class="text-xs font-bold text-slate-700">IS Codes Library (BIS)</span>
-                        </a>
-                        <a href="https://nptel.ac.in/courses/105" target="_blank" class="flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 transition group">
-                            <i data-lucide="book-open" class="w-5 h-5 text-blue-600"></i>
-                            <span class="text-xs font-bold text-slate-700">NPTEL Civil Portal</span>
-                        </a>
-                    </div>
+        <!-- Join Classroom Section -->
+        <section id="classroom" class="bg-slate-900 rounded-3xl p-8 text-white">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <div class="space-y-6">
+                    <span class="inline-block px-3 py-1 bg-blue-600 rounded-full text-xs font-bold tracking-widest uppercase">Lifelong Learning</span>
+                    <h2 class="text-3xl font-bold">Join the Digital Classroom</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed">Register your interest to receive specialized continuous learning modules in our Google Classroom environment. Verification is mandatory for access.</p>
                 </div>
-                <div class="bg-blue-600 p-8 rounded-[2.5rem] text-white shadow-xl">
-                    <h4 class="font-black uppercase text-xs tracking-widest mb-4">Resume Support</h4>
-                    <p class="text-[10px] text-blue-100 leading-relaxed mb-6">Need a professional review for your Civil Engg. resume or CV? Send your draft to our placement cell.</p>
-                    <a href="mailto:peteccivil@petengg.ac.in" class="block w-full bg-white text-blue-700 py-3 rounded-xl text-[10px] font-black uppercase text-center tracking-widest hover:bg-blue-50 transition">Email My CV</a>
+
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
+                    <h3 class="text-lg font-bold mb-4 text-center">Request Access</h3>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div>
+                            <label class="text-xs text-slate-400 mb-1 block uppercase font-bold tracking-wider">Full Name</label>
+                            <input type="text" placeholder="John Doe" class="w-full px-4 py-3 rounded-xl form-input">
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-400 mb-1 block uppercase font-bold tracking-wider">Register Number</label>
+                            <input type="text" placeholder="PET-XXXX-XX" class="w-full px-4 py-3 rounded-xl form-input">
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-400 mb-1 block uppercase font-bold tracking-wider">Institutional Email</label>
+                            <div class="relative">
+                                <input type="email" placeholder="username" class="w-full px-4 py-3 pr-28 rounded-xl form-input">
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold text-xs">@petengg.ac.in</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-900/50 mt-4">
+                        Submit for Verification
+                    </button>
                 </div>
             </div>
-        </aside>
+        </section>
+
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-slate-900 text-slate-400 py-12 px-4 text-center border-t border-white/5">
-        <p class="text-[10px] font-black uppercase tracking-[0.3em]">&copy; 2026 PETEC Civil | Career Resource Center</p>
+    <footer class="max-w-7xl mx-auto mt-8 pb-8 text-center text-slate-400 text-xs border-t border-slate-200 pt-6">
+        <div class="flex justify-center space-x-4 mb-4">
+            <a href="magazine.html" class="hover:text-blue-600">Magazine</a>
+            <a href="alumni.html" class="hover:text-blue-600">Alumni Portal</a>
+            <a href="consultancy.html" class="hover:text-blue-600">Consultancy</a>
+        </div>
+        <p>&copy; 2024 PETEC Civil Engineering Hub. Curated academic resources based on standard engineering principles.</p>
     </footer>
 
-    <!-- INTERACTIVE PATHWAY MODAL -->
-    <div id="path-modal" class="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/90 backdrop-blur-md opacity-0 pointer-events-none p-4">
-        <div class="modal-content bg-white w-full max-w-2xl rounded-[3rem] shadow-2xl overflow-hidden relative transform scale-95 transition-transform duration-500">
-            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-blue-600 transition"><i data-lucide="x-circle" class="w-8 h-8"></i></button>
-            <div class="p-10 md:p-16">
-                <div id="modal-icon" class="w-20 h-20 bg-blue-50 text-blue-600 rounded-3xl flex items-center justify-center mb-8 shadow-inner">
-                    <!-- Icon Injected by JS -->
-                </div>
-                <h3 id="modal-title" class="text-3xl font-black text-[#002147] uppercase tracking-tighter italic mb-4">Pathway Title</h3>
-                <div class="w-12 h-1 bg-blue-600 rounded-full mb-8"></div>
-                
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h4 class="text-[10px] font-black uppercase text-blue-600 tracking-widest mb-4">Suitable For Students Who:</h4>
-                        <ul id="modal-suitability" class="space-y-3 text-xs text-slate-600 font-medium list-disc pl-4">
-                            <!-- List Injected by JS -->
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-[10px] font-black uppercase text-blue-600 tracking-widest mb-4">Suggested Suitable Roles:</h4>
-                        <div id="modal-roles" class="flex flex-wrap gap-2">
-                            <!-- Roles Injected by JS -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-12 pt-8 border-t border-slate-100">
-                    <p id="modal-description" class="text-sm text-slate-500 leading-relaxed italic">Description text...</p>
-                </div>
+    <!-- Unified Modal for Discipline & Toolkit -->
+    <div id="generalModal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 shadow-2xl relative" onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-900 transition">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div id="modalContent" class="space-y-6">
+                <!-- Content injected via JS -->
             </div>
         </div>
     </div>
 
     <script>
-        lucide.createIcons();
-
-        const pathData = {
+        const disciplineData = {
             structural: {
                 title: "Structural Engineering",
-                icon: "building-2",
-                suitability: [
-                    "Excel in Engineering Mechanics and Math.",
-                    "Enjoy complex problem solving.",
-                    "Have a keen interest in stability and physics."
-                ],
+                focus: "Focuses on the bones and muscles of buildings. You'll ensure safe load paths for global landmarks.",
+                suitable: "Excel in Engineering Mechanics and Math.",
+                qualities: "Enjoy complex problem solving. Have a keen interest in stability and physics.",
                 roles: ["Seismic Analyst", "High-Rise Designer", "Offshore Platform Engineer", "Bridge Engineer"],
-                desc: "Focuses on the bones and muscles of buildings. You'll ensure safe load paths for global landmarks."
+                software: ["STAAD.Pro", "ETABS", "SAP2000", "Revit Structure"]
             },
-            environmental: {
-                title: "Hydraulics & Environmental",
-                icon: "droplets",
-                suitability: [
-                    "Passion for sustainability and ecology.",
-                    "Strong background in fluid mechanics.",
-                    "Interested in urban health systems."
-                ],
-                roles: ["Environmental Auditor", "PHE Engineer", "Wastewater Plant Designer", "Irrigation Planner"],
-                desc: "Designing the systems that provide water and manage waste—the true foundation of civilization."
-            },
-            geomatics: {
-                title: "Geomatics & Surveying",
-                icon: "map",
-                suitability: [
-                    "Interested in technology and spatial data.",
-                    "Enjoy field investigations.",
-                    "Proficiency in mapping and GIS."
-                ],
-                roles: ["GIS Specialist", "Topographical Surveyor", "Photogrammetrist", "Remote Sensing Expert"],
-                desc: "High-precision mapping and geospatial analysis used for infrastructure planning and land demarcation."
-            },
-            construction: {
-                title: "Construction Management",
-                icon: "hard-hat",
-                suitability: [
-                    "Strong leadership and management skills.",
-                    "Interest in on-site project execution.",
-                    "Organized and time-sensitive."
-                ],
-                roles: ["Project Manager", "Quality Control Engineer", "Cost Estimator", "Safety Officer (HSE)"],
-                desc: "Translating blue-prints into reality. You manage the labor, time, and budget of mega-projects."
+            bim: {
+                title: "BIM & Digital Twins",
+                focus: "Manage the digital lifecycle of infrastructure. Coordinate disciplines and optimize construction through 3D/4D/5D data.",
+                suitable: "Tech-savvy students with a strong spatial imagination.",
+                qualities: "Highly detail-oriented. Enjoys inter-disciplinary collaboration.",
+                roles: ["BIM Modeler", "VDC Coordinator", "BIM Manager", "Digital Twin Specialist"],
+                software: ["Autodesk Revit", "Navisworks", "BIM 360", "Tekla Structures"]
             },
             govt: {
-                title: "Government Sector (UPSC/SSC)",
-                icon: "landmark",
-                suitability: [
-                    "Desire for high career stability.",
-                    "Interested in public policy and infrastructure.",
-                    "Willingness to serve in administrative tech roles."
-                ],
-                roles: ["Junior Engineer (JE)", "Asst. Engineer (PWD/NHAI)", "Railway Engineer", "ISRO Scientist (Civil)"],
-                desc: "Serving the nation through large-scale public infrastructure and regulatory technical bodies."
+                title: "Government & Public Sector",
+                focus: "Work on national-scale infrastructure including Railways, Highways (NHAI), and Aerospace (ISRO).",
+                suitable: "Students seeking stability and national service impact.",
+                qualities: "Strong adherence to codes and standards. Competitive exam focus.",
+                roles: ["IES Officer", "Assistant Engineer (PWD/WRD)", "Junior Engineer (SSC)", "Planning Officer"],
+                software: ["AutoCAD", "MS Project", "Excel for Estimations", "Primavera"]
             },
-            startup: {
-                title: "Entrepreneurship & Bvisor",
-                icon: "rocket",
-                suitability: [
-                    "Creative and innovation-driven.",
-                    "Strong networking and business acumen.",
-                    "Interest in independent consulting."
-                ],
-                roles: ["Tech-Consultant", "Founding Partner", "BIM Implementation Lead", "Visualization Expert"],
-                desc: "Forge your own path in the industry. Leveraging Bvisor experience to launch independent ventures."
+            geotechnical: {
+                title: "Geotechnical Engineering",
+                focus: "Master the earth. You'll design the critical systems that keep structures rooted and stable.",
+                suitable: "Fascinated by geology and soil mechanics.",
+                qualities: "Detail-oriented. Enjoy site investigations and laboratory analysis.",
+                roles: ["Foundation Engineer", "Site Investigation Specialist", "Tunnel Engineer", "Earth Dam Designer"],
+                software: ["PLAXIS", "GeoStudio", "gINT", "FLAC3D"]
+            },
+            transportation: {
+                title: "Transportation Engineering",
+                focus: "Architect of the grid. Design the networks that connect cities and move civilizations.",
+                suitable: "Logical thinkers with interest in logistics and planning.",
+                qualities: "Strong spatial awareness and interest in urban data/traffic flow.",
+                roles: ["Traffic Signal Engineer", "Highway Geometric Designer", "Airport Architect", "Transit Planner"],
+                software: ["Civil 3D", "Bentley OpenRoads", "PTV Vissim", "Synchro"]
+            },
+            environmental: {
+                title: "Environmental Engineering",
+                focus: "Guardian of the flow. Manage the world's most precious resource and solve pollution challenges through technology.",
+                suitable: "Passionate about sustainability and biology/chemistry.",
+                qualities: "Strong simulation skills and environmental ethics.",
+                roles: ["Water Quality Analyst", "EHS Specialist", "Solid Waste Manager", "Environmental Consultant"],
+                software: ["QGIS", "HEC-RAS", "EPANET", "SWMM"]
             }
         };
 
-        function openPathDetails(pathKey) {
-            const data = pathData[pathKey];
-            const modal = document.getElementById('path-modal');
-            
-            document.getElementById('modal-title').innerText = data.title;
-            document.getElementById('modal-description').innerText = data.desc;
-            
-            const suitabilityList = document.getElementById('modal-suitability');
-            suitabilityList.innerHTML = data.suitability.map(s => `<li>${s}</li>`).join('');
-            
-            const rolesList = document.getElementById('modal-roles');
-            rolesList.innerHTML = data.roles.map(r => `<span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-[10px] font-black uppercase tracking-tight">${r}</span>`).join('');
-            
-            const iconContainer = document.getElementById('modal-icon');
-            iconContainer.innerHTML = `<i data-lucide="${data.icon}" class="w-10 h-10"></i>`;
-            lucide.createIcons();
+        const toolkitData = {
+            linkedin: {
+                title: "LinkedIn Optimization",
+                icon: "fab fa-linkedin",
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-slate-600">Your digital presence is your first impression in the industry.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <h4 class="font-bold text-blue-700 text-sm mb-2">Profile Hygiene</h4>
+                                <ul class="text-sm text-slate-600 space-y-2">
+                                    <li>• Professional Headshot in site/office gear</li>
+                                    <li>• Keyword-rich headline (e.g., Structural Engineer | Revit Expert)</li>
+                                    <li>• Summarize your project achievements</li>
+                                </ul>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <h4 class="font-bold text-blue-700 text-sm mb-2">Content Strategy</h4>
+                                <ul class="text-sm text-slate-600 space-y-2">
+                                    <li>• Post certifications from edX/Coursera</li>
+                                    <li>• Share insights from your lab projects</li>
+                                    <li>• Engage with senior PEs and site managers</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            placement: {
+                title: "Placement Blueprint",
+                icon: "fas fa-file-invoice",
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-slate-600">Strategic approach to landing roles in top-tier engineering firms.</p>
+                        <div class="p-4 bg-blue-50 rounded-xl border border-blue-100">
+                            <h4 class="font-bold text-blue-800 text-sm mb-2">The 1-Page Rule</h4>
+                            <p class="text-xs text-slate-700">Keep it concise. Quantify impact: "Reduced material waste by 12% through better calculation" is better than "Managed material usage".</p>
+                        </div>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li>• <b>ATS Ready:</b> Use standard section headers like "Experience" and "Skills".</li>
+                            <li>• <b>Project Highlights:</b> Include a QR code linking to your BIM models or site photos.</li>
+                            <li>• <b>Certification Stack:</b> Highlight Revit and Primavera expertise clearly.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            coverletter: {
+                title: "Cover Letter Strategy",
+                icon: "fas fa-envelope-open-text",
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-slate-600">The narrative bridge between your CV and the company's needs.</p>
+                        <div class="grid grid-cols-1 gap-4">
+                            <div class="p-4 border-l-4 border-blue-500 bg-slate-50">
+                                <h4 class="font-bold text-slate-800 text-sm mb-1">Focus on "The Gap"</h4>
+                                <p class="text-xs text-slate-600">Identify a problem the firm is solving (e.g., smart city drainage) and explain how your specific skill set solves it.</p>
+                            </div>
+                            <div class="p-4 border-l-4 border-blue-500 bg-slate-50">
+                                <h4 class="font-bold text-slate-800 text-sm mb-1">Call to Action</h4>
+                                <p class="text-xs text-slate-600">Don't just wait. Propose a specific time for an interview or a project discussion.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        };
 
-            modal.classList.add('modal-active');
+        function openDiscipline(id) {
+            const data = disciplineData[id];
+            const content = document.getElementById('modalContent');
+            content.innerHTML = `
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-drafting-compass text-white text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-slate-900">${data.title}</h2>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                        <h4 class="text-sm font-bold text-blue-700 uppercase mb-1">Core Focus</h4>
+                        <p class="text-slate-700 text-sm leading-relaxed">${data.focus}</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-900 mb-1">Suitable Students:</h4>
+                            <p class="text-xs text-slate-600">${data.suitable}</p>
+                            <h4 class="text-sm font-bold text-slate-900 mt-4 mb-2">Suggested Software:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                ${data.software.map(s => `<span class="px-2 py-1 bg-slate-100 text-slate-700 rounded text-[10px] font-bold">${s}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-900 mb-2">Career Roles:</h4>
+                            <div class="space-y-2">
+                                ${data.roles.map(r => `<div class="p-2 bg-slate-50 rounded-lg text-xs text-slate-700 font-medium"><i class="fas fa-user-tie text-blue-400 mr-2"></i> ${r}</div>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            showModal();
+        }
+
+        function openToolkit(id) {
+            const data = toolkitData[id];
+            const content = document.getElementById('modalContent');
+            content.innerHTML = `
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
+                        <i class="${data.icon} text-white text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-slate-900">${data.title}</h2>
+                </div>
+                <div class="mt-4">
+                    ${data.content}
+                </div>
+            `;
+            showModal();
+        }
+
+        function showModal() {
+            document.getElementById('generalModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
 
-        function closeModal() {
-            document.getElementById('path-modal').classList.remove('modal-active');
+        function closeModal(e) {
+            document.getElementById('generalModal').style.display = 'none';
             document.body.style.overflow = 'auto';
         }
-
-        function toggleAccordion(button) {
-            const item = button.parentElement;
-            const isActive = item.classList.contains('accordion-active');
-            document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('accordion-active'));
-            if (!isActive) item.classList.add('accordion-active');
-        }
-
-        function filterResources() {
-            let input = document.getElementById('resourceSearch').value.toLowerCase();
-            let cards = document.querySelectorAll('.career-card, .accordion-item');
-            cards.forEach(card => {
-                let text = card.textContent.toLowerCase();
-                card.style.display = text.includes(input) ? "block" : "none";
-            });
-        }
     </script>
+
 </body>
 </html>
