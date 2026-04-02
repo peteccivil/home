@@ -33,6 +33,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            border: none;
         }
         .social-btn:hover {
             background: #e2e8f0;
@@ -43,9 +45,43 @@
             height: 100%;
             object-fit: contain;
         }
+        
+        /* Modal Styles */
+        #bioModal {
+            display: none;
+            transition: opacity 0.3s ease;
+        }
+        #bioModal.active {
+            display: flex;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 text-pretty">
+
+    <!-- Bio Modal Overlay -->
+    <div id="bioModal" class="fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-sm items-center justify-center p-4">
+        <div class="bg-white w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl transform transition-all">
+            <div class="bg-[#002147] p-6 text-white flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-blue-500/20 rounded-lg">
+                        <i data-lucide="user-round" class="w-5 h-5 text-blue-300"></i>
+                    </div>
+                    <h3 id="modalName" class="font-black uppercase tracking-tight text-lg">Professor Bio</h3>
+                </div>
+                <button onclick="closeBio()" class="p-2 hover:bg-white/10 rounded-full transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="p-8">
+                <p id="modalBio" class="text-slate-600 leading-relaxed italic text-sm md:text-base">
+                    Loading biography...
+                </p>
+                <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end">
+                    <button onclick="closeBio()" class="bg-slate-100 text-slate-600 px-6 py-2 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-slate-200 transition">Close Window</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Top Bar -->
     <div class="bg-[#002147] text-white py-2 px-6 text-sm flex justify-between items-center hidden md:flex border-b border-white/5">
@@ -98,12 +134,16 @@
                         <h3 class="text-xl font-black text-[#002147] uppercase tracking-tight leading-tight text-pretty">Dr. Mohamed Usman T M</h3>
                         <p class="text-slate-500 text-[10px] font-bold uppercase mt-1 mb-3">B.Tech., M.E. Ph.D. MIE</p>
                         <p class="text-blue-600 text-[10px] font-black uppercase tracking-widest mb-6">Assistant Professor & HOD</p>
+
                         <div class="mt-auto pt-6 border-t border-slate-100 flex gap-2">
                             <a href="https://www.linkedin.com/in/mohamedusman/" title="LinkedIn" class="social-btn"><img src="assets/linkedin.png" alt="LinkedIn" onerror="this.src='https://cdn-icons-png.flaticon.com/512/174/174857.png'"></a>
                             <a href="https://scholar.google.com/citations?user=e1mS91IAAAAJ&hl=en&oi=ao" title="Google Scholar" class="social-btn"><img src="assets/scholar.png" alt="Scholar" onerror="this.src='https://cdn-icons-png.flaticon.com/512/281/281764.png'"></a>
                             <a href="https://orcid.org/0000-0002-4983-4634" title="ORCID" class="social-btn"><img src="assets/orcid.png" alt="ORCID" onerror="this.src='https://cdn-icons-png.flaticon.com/512/512/512211.png'"></a>
                             <a href="https://drmohamedusman.com/" title="Personal Website" class="social-btn"><img src="assets/website.png" alt="Website" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1006/1006771.png'"></a>
                             <a href="mailto:civil.usman@petengg.ac.in" class="social-btn"><img src="assets/email.png" alt="Email" onerror="this.src='https://cdn-icons-png.flaticon.com/512/732/732200.png'"></a>
+                            <button onclick="openBio('Dr. Mohamed Usman T M', 'To be updated')" title="Know Your Professor" class="social-btn">
+                                <img src="assets/professor.png" alt="Bio" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3429/3429433.png'">
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -127,7 +167,7 @@
                 
                 <div class="space-y-4">
                     <p class="text-slate-600 text-sm md:text-base leading-relaxed italic font-medium max-w-2xl">
-                        Our department is dedicated to contributing toward environmental preservation and overall sustainable development through technical excellence and ethical practice.
+                        Our department is dedicated to contributing toward <span class="text-[#002147] font-bold border-b-2 border-blue-100">environmental preservation</span> and overall sustainable development through technical excellence and ethical practice.
                     </p>
                     <p class="text-slate-500 text-sm leading-relaxed max-w-3xl">
                         We go beyond theoretical instruction to provide an educational environment that mirrors the evolving needs of the global engineering sector. Our primary focus is on developing industry-ready competencies and fostering an entrepreneurial mindset among our students. By blending conceptual depth with practical execution, we empower our graduates to handle complex professional challenges with moral clarity and a deep commitment to social responsibility.
@@ -165,12 +205,16 @@
                     <h3 class="text-xl font-black text-[#002147] uppercase tracking-tight leading-tight">Mr. Basheer Ahamed. M. K</h3>
                     <p class="text-slate-500 text-[10px] font-bold uppercase mt-1 mb-3">B.E., M.E. MIE</p>
                     <p class="text-blue-600 text-[10px] font-black uppercase tracking-widest mb-6">Assistant Professor</p>
+                    
                     <div class="mt-auto pt-6 border-t border-slate-100 flex gap-2">
                         <a href="#" class="social-btn"><img src="assets/linkedin.png" alt="LI"></a>
                         <a href="#" class="social-btn"><img src="assets/scholar.png" alt="GS"></a>
                         <a href="#" class="social-btn"><img src="assets/orcid.png" alt="ID"></a>
                         <a href="#" class="social-btn"><img src="assets/website.png" alt="W"></a>
                         <a href="mailto:#" class="social-btn"><img src="assets/email.png" alt="E"></a>
+                        <button onclick="openBio('Mr. Basheer Ahamed. M. K', 'To be updated.')" title="Know Your Professor" class="social-btn">
+                            <img src="assets/professor.png" alt="Bio" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3429/3429433.png'">
+                        </button>
                     </div>
                 </div>
             </div>
@@ -185,12 +229,16 @@
                     <h3 class="text-xl font-black text-[#002147] uppercase tracking-tight leading-tight text-pretty">Dr. Sokkanathan G</h3>
                     <p class="text-slate-500 text-[10px] font-bold uppercase mt-1 mb-3 text-pretty">B.E., M.E., Ph.D.</p>
                     <p class="text-blue-600 text-[10px] font-black uppercase tracking-widest mb-6">Associate Professor</p>
+                    
                     <div class="mt-auto pt-6 border-t border-slate-100 flex gap-2">
                         <a href="#" class="social-btn"><img src="assets/linkedin.png" alt="LI"></a>
                         <a href="#" class="social-btn"><img src="assets/scholar.png" alt="GS"></a>
                         <a href="#" class="social-btn"><img src="assets/orcid.png" alt="ID"></a>
                         <a href="#" class="social-btn"><img src="assets/website.png" alt="W"></a>
                         <a href="mailto:#" class="social-btn"><img src="assets/email.png" alt="E"></a>
+                        <button onclick="openBio('Dr. Sokkanathan G', 'To be updated.')" title="Know Your Professor" class="social-btn">
+                            <img src="assets/professor.png" alt="Bio" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3429/3429433.png'">
+                        </button>
                     </div>
                 </div>
             </div>
@@ -205,12 +253,16 @@
                     <h3 class="text-xl font-black text-[#002147] uppercase tracking-tight leading-tight text-pretty">Mr. Ruban Daniel V</h3>
                     <p class="text-slate-500 text-[10px] font-bold uppercase mt-1 mb-3">BE., ME. Ph.D. (doing)</p>
                     <p class="text-blue-600 text-[10px] font-black uppercase tracking-widest mb-6">Assistant Professor</p>
+                    
                     <div class="mt-auto pt-6 border-t border-slate-100 flex gap-2">
                         <a href="#" class="social-btn"><img src="assets/linkedin.png" alt="LI"></a>
                         <a href="https://scholar.google.com/citations?user=F8dAJREAAAAJ&hl=en&oi=ao" class="social-btn"><img src="assets/scholar.png" alt="GS"></a>
                         <a href="#" class="social-btn"><img src="assets/orcid.png" alt="ID"></a>
                         <a href="#" class="social-btn"><img src="assets/website.png" alt="W"></a>
                         <a href="mailto:#" class="social-btn"><img src="assets/email.png" alt="E"></a>
+                        <button onclick="openBio('Mr. Ruban Daniel V', 'To be updated')" title="Know Your Professor" class="social-btn">
+                            <img src="assets/professor.png" alt="Bio" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3429/3429433.png'">
+                        </button>
                     </div>
                 </div>
             </div>
@@ -225,12 +277,16 @@
                     <h3 class="text-xl font-black text-[#002147] uppercase tracking-tight leading-tight">Mrs. Reshma Raj P V</h3>
                     <p class="text-slate-500 text-[10px] font-bold uppercase mt-1 mb-3">B.E., M.E. Ph.D. (doing)</p>
                     <p class="text-blue-600 text-[10px] font-black uppercase tracking-widest mb-6">Assistant Professor</p>
+                    
                     <div class="mt-auto pt-6 border-t border-slate-100 flex gap-2">
                         <a href="https://www.linkedin.com/in/reshma-raj-bb42592a1/" class="social-btn"><img src="assets/linkedin.png" alt="LI"></a>
                         <a href="https://scholar.google.com/citations?user=eFYDhx0AAAAJ&hl=en&oi=ao" class="social-btn"><img src="assets/scholar.png" alt="GS"></a>
                         <a href="#" class="social-btn"><img src="assets/orcid.png" alt="ID"></a>
                         <a href="#" class="social-btn"><img src="assets/website.png" alt="W"></a>
                         <a href="mailto:#" class="social-btn"><img src="assets/email.png" alt="E"></a>
+                        <button onclick="openBio('Mrs. Reshma Raj P V', 'To be updated')" title="Know Your Professor" class="social-btn">
+                            <img src="assets/professor.png" alt="Bio" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3429/3429433.png'">
+                        </button>
                     </div>
                 </div>
             </div>
@@ -245,12 +301,16 @@
                     <h3 class="text-xl font-black text-[#002147] uppercase tracking-tight leading-tight">Dr. Mohamed Sahibulla S M</h3>
                     <p class="text-slate-500 text-[10px] font-bold uppercase mt-1 mb-3">B.E., M.E., Ph.D</p>
                     <p class="text-blue-600 text-[10px] font-black uppercase tracking-widest mb-6">Assistant Professor</p>
+                    
                     <div class="mt-auto pt-6 border-t border-slate-100 flex gap-2">
                         <a href="https://www.linkedin.com/in/dr-s-m-mohamed-saifullah-m-e-ph-d-17795061/" class="social-btn"><img src="assets/linkedin.png" alt="LI"></a>
                         <a href="https://scholar.google.com/citations?user=moajIV4AAAAJ&hl=en&oi=ao" class="social-btn"><img src="assets/scholar.png" alt="GS"></a>
                         <a href="#" class="social-btn"><img src="assets/orcid.png" alt="ID"></a>
                         <a href="#" class="social-btn"><img src="assets/website.png" alt="W"></a>
                         <a href="mailto:#" class="social-btn"><img src="assets/email.png" alt="E"></a>
+                        <button onclick="openBio('Dr. Mohamed Sahibulla S M', 'To be updated')" title="Know Your Professor" class="social-btn">
+                            <img src="assets/professor.png" alt="Bio" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3429/3429433.png'">
+                        </button>
                     </div>
                 </div>
             </div>
@@ -265,12 +325,16 @@
                     <h3 class="text-xl font-black text-[#002147] uppercase tracking-tight leading-tight text-pretty">Mr. Petchi Muthu E</h3>
                     <p class="text-slate-500 text-[10px] font-bold uppercase mt-1 mb-3">B.E., M.E.</p>
                     <p class="text-blue-600 text-[10px] font-black uppercase tracking-widest mb-6">Assistant Professor</p>
+                    
                     <div class="mt-auto pt-6 border-t border-slate-100 flex gap-2">
                         <a href="#" class="social-btn"><img src="assets/linkedin.png" alt="LI"></a>
                         <a href="#" class="social-btn"><img src="assets/scholar.png" alt="GS"></a>
                         <a href="#" class="social-btn"><img src="assets/orcid.png" alt="ID"></a>
                         <a href="#" class="social-btn"><img src="assets/website.png" alt="W"></a>
                         <a href="mailto:#" class="social-btn"><img src="assets/email.png" alt="E"></a>
+                        <button onclick="openBio('Mr. Petchi Muthu E', 'To be updated')" title="Know Your Professor" class="social-btn">
+                            <img src="assets/professor.png" alt="Bio" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3429/3429433.png'">
+                        </button>
                     </div>
                 </div>
             </div>
@@ -283,14 +347,18 @@
                 </div>
                 <div class="p-8 flex flex-col flex-grow text-pretty">
                     <h3 class="text-xl font-black text-[#002147] uppercase tracking-tight leading-tight">Ms. Astin Simprose Shenuba. A</h3>
-                    <p class="text-slate-500 text-[10px] font-bold uppercase mt-1 mb-3">B.E., M.E. [PH.D]</p>
+                    <p class="text-slate-500 text-[10px] font-bold uppercase mt-1 mb-3">B.E., M.E.</p>
                     <p class="text-blue-600 text-[10px] font-black uppercase tracking-widest mb-6">Assistant Professor</p>
+                    
                     <div class="mt-auto pt-6 border-t border-slate-100 flex gap-2">
                         <a href="#" class="social-btn"><img src="assets/linkedin.png" alt="LI"></a>
                         <a href="#" class="social-btn"><img src="assets/scholar.png" alt="GS"></a>
                         <a href="#" class="social-btn"><img src="assets/orcid.png" alt="ID"></a>
                         <a href="#" class="social-btn"><img src="assets/website.png" alt="W"></a>
                         <a href="mailto:#" class="social-btn"><img src="assets/email.png" alt="E"></a>
+                        <button onclick="openBio('Ms. Astin Simprose Shenuba. A', 'To be updated')" title="Know Your Professor" class="social-btn">
+                            <img src="assets/professor.png" alt="Bio" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3429/3429433.png'">
+                        </button>
                     </div>
                 </div>
             </div>
@@ -325,6 +393,30 @@
     </footer>
 
     <script>
+        // Modal Logic
+        const modal = document.getElementById('bioModal');
+        const modalName = document.getElementById('modalName');
+        const modalBio = document.getElementById('modalBio');
+
+        function openBio(name, bio) {
+            modalName.innerText = name;
+            modalBio.innerText = bio;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeBio() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on click outside content
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeBio();
+            }
+        }
+
         lucide.createIcons();
     </script>
 </body>
