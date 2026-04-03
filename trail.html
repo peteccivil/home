@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civerse 2025 | Grand Release</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap');
+        
+        body { 
+            background-color: #000f1f;
+            /* Replace the URL below with your actual background image */
+            background-image: linear-gradient(rgba(0, 15, 31, 0.85), rgba(0, 15, 31, 0.85)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Box Structure */
+        .box-container {
+            perspective: 1200px;
+            position: relative;
+            z-index: 20;
+        }
+
+        .box-wrapper {
+            position: relative;
+            width: 320px;
+            height: 400px;
+            transform-style: preserve-3d;
+            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Realistic Silk Ribbon */
+        .ribbon-part {
+            position: absolute;
+            background: linear-gradient(90deg, #d97706 0%, #fbbf24 50%, #d97706 100%);
+            z-index: 30;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .r-top { top: 0; left: 50%; width: 44px; height: 50%; transform: translateX(-50%); }
+        .r-bottom { bottom: 0; left: 50%; width: 44px; height: 50%; transform: translateX(-50%); }
+        .r-left { top: 50%; left: 0; width: 50%; height: 44px; transform: translateY(-50%); }
+        .r-right { top: 50%; right: 0; width: 50%; height: 44px; transform: translateY(-50%); }
+
+        /* The Grand Ceremonial Bow */
+        .ribbon-bow-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 50;
+            width: 120px;
+            height: 100px;
+            transition: all 0.6s ease;
+        }
+
+        .bow-knot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 44px;
+            background: radial-gradient(circle at top left, #fbbf24, #b45309);
+            border-radius: 8px;
+            transform: translate(-50%, -50%);
+            z-index: 60;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .bow-loop {
+            position: absolute;
+            top: 50%;
+            width: 70px;
+            height: 50px;
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50% 50% 10% 50%;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .loop-left { right: 50%; transform: translateY(-50%) rotate(-10deg); transform-origin: right center; }
+        .loop-right { left: 50%; transform: translateY(-50%) rotate(10deg) scaleX(-1); transform-origin: left center; }
+
+        .bow-tail {
+            position: absolute;
+            top: 60%;
+            width: 60px;
+            height: 80px;
+            background: linear-gradient(to bottom, #d97706, #fbbf24);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 80%, 0% 100%);
+            z-index: 45;
+            transition: all 0.8s ease;
+        }
+        .tail-left { right: 52%; transform: rotate(-25deg); transform-origin: top right; }
+        .tail-right { left: 52%; transform: rotate(25deg); transform-origin: top left; }
+
+        /* Unboxing Animation */
+        .untied .r-top { transform: translateX(-50%) translateY(-150%); opacity: 0; }
+        .untied .r-bottom { transform: translateX(-50%) translateY(150%); opacity: 0; }
+        .untied .r-left { transform: translateY(-50%) translateX(-150%); opacity: 0; }
+        .untied .r-right { transform: translateY(-50%) translateX(150%); opacity: 0; }
+        
+        .untied .bow-knot { transform: translate(-50%, -50%) scale(0) rotate(90deg); opacity: 0; }
+        .untied .loop-left { transform: translateY(-50%) rotate(-60deg) scale(0); opacity: 0; }
+        .untied .loop-right { transform: translateY(-50%) rotate(60deg) scale(0) scaleX(-1); opacity: 0; }
+        .untied .tail-left { transform: translateY(100px) rotate(-45deg); opacity: 0; }
+        .untied .tail-right { transform: translateY(100px) rotate(45deg); opacity: 0; }
+        
+        .box-panel {
+            position: absolute;
+            inset: 0;
+            background: #002147;
+            border: 2px solid rgba(255,255,255,0.05);
+            z-index: 10;
+            transition: all 1.2s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .untied .panel-top { transform: translateY(-120%) rotateX(45deg); opacity: 0; }
+        .untied .panel-bottom { transform: translateY(120%) rotateX(-45deg); opacity: 0; }
+
+        /* UI Elements */
+        .node-active {
+            box-shadow: 0 0 25px #fbbf24, 0 0 50px #fbbf24;
+            background-color: #fbbf24 !important;
+            transform: scale(1.25);
+        }
+        
+        .pulse-ring { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }
+
+        .mag-reveal {
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .untied-final .mag-reveal { transform: scale(1) rotate(0deg); opacity: 1; }
+
+        /* Button Disabled State */
+        .btn-locked {
+            opacity: 0.5;
+            cursor: not-allowed !important;
+            filter: grayscale(1);
+            transform: scale(0.9) !important;
+        }
+    </style>
+</head>
+<body class="overflow-hidden h-screen w-screen flex flex-col items-center justify-center font-['Inter'] selection:bg-amber-200">
+
+    <div id="reveal-UI" class="z-[100] text-center mb-12 transition-all duration-700">
+        <div class="mb-4 inline-block px-5 py-1.5 border border-amber-400/30 rounded-full text-amber-400 text-[10px] font-black uppercase tracking-[0.5em] bg-amber-400/10 backdrop-blur-sm">
+            Grand Ceremonial Unveiling
+        </div>
+        
+        <h1 class="text-white text-5xl md:text-7xl font-black uppercase tracking-tighter italic mb-8 drop-shadow-2xl">Civerse</h1>
+        
+        <div class="flex gap-6 justify-center mb-10" id="node-container">
+            <div class="w-5 h-5 rounded-full bg-slate-800/80 transition-all duration-700 border border-white/20" id="node-1"></div>
+            <div class="w-5 h-5 rounded-full bg-slate-800/80 transition-all duration-700 border border-white/20" id="node-2"></div>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+            <div class="relative group">
+                <div id="ring-1" class="absolute inset-0 bg-white/10 rounded-2xl pulse-ring"></div>
+                <button type="button" onclick="handleGuestClick(1)" id="btn-1" class="relative bg-white text-[#002147] px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl hover:scale-105 transition active:scale-95 flex items-center gap-4 border-b-4 border-slate-300">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-amber-600"></i>
+                    <span>Bestow Royal Sanction</span>
+                </button>
+            </div>
+
+            <div class="relative group">
+                <div id="ring-2" class="absolute inset-0 bg-white/10 rounded-2xl pulse-ring"></div>
+                <button type="button" onclick="handleGuestClick(2)" id="btn-2" class="relative bg-white text-[#002147] px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl hover:scale-105 transition active:scale-95 flex items-center gap-4 border-b-4 border-slate-300">
+                    <i data-lucide="key-round" class="w-5 h-5 text-amber-600"></i>
+                    <span>Release Eternal Seal</span>
+                </button>
+            </div>
+        </div>
+        
+        <p class="mt-8 text-amber-200/50 text-[10px] uppercase font-black tracking-[0.3em]" id="click-status">Awaiting Dual Authorization</p>
+    </div>
+
+    <div class="box-container relative" id="box-outer">
+        <div id="magazine-preview" class="mag-reveal absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+            <div class="max-w-[280px] md:max-w-md w-full bg-white p-3 shadow-[0_60px_120px_rgba(0,0,0,0.8)] rounded-sm transform -rotate-1 border-4 border-white/10">
+                 <img src="assets/magazine-cover.jpg" alt="Civerse Cover" class="w-full h-auto" onerror="this.src='https://images.unsplash.com/photo-1544476073-92b8d6bb3620?q=80&w=800'">
+            </div>
+        </div>
+
+        <div id="box-wrapper" class="box-wrapper">
+            <div class="ribbon-part r-top" id="rt"></div>
+            <div class="ribbon-part r-bottom" id="rb"></div>
+            <div class="ribbon-part r-left" id="rl"></div>
+            <div class="ribbon-part r-right" id="rr"></div>
+            
+            <div class="ribbon-bow-container" id="main-bow">
+                <div class="bow-loop loop-left"></div>
+                <div class="bow-loop loop-right"></div>
+                <div class="bow-knot"></div>
+                <div class="bow-tail tail-left"></div>
+                <div class="bow-tail tail-right"></div>
+            </div>
+            
+            <div class="box-panel panel-top rounded-t-[2.5rem] flex items-center justify-center overflow-hidden">
+                <div class="opacity-10 pointer-events-none transform -rotate-12">
+                    <img src="assets/favilogo.png" class="w-32 grayscale brightness-200" alt="">
+                </div>
+            </div>
+            <div class="box-panel panel-bottom rounded-b-[2.5rem]"></div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        let clickCount = 0;
+        const totalGuests = 2;
+        const clickedButtons = new Set();
+
+        function handleGuestClick(btnId) {
+            if (clickedButtons.has(btnId)) return;
+            
+            clickCount++;
+            clickedButtons.add(btnId);
+            
+            // 1. Disable the clicked button
+            const btn = document.getElementById(`btn-${btnId}`);
+            const ring = document.getElementById(`ring-${btnId}`);
+            btn.classList.add('btn-locked');
+            ring.style.display = 'none';
+
+            // 2. Highlight Node
+            const currentNode = document.getElementById(`node-${clickCount}`);
+            if (currentNode) currentNode.classList.add('node-active');
+
+            // 3. Visual Feedback (Bow Pulse)
+            const bow = document.getElementById('main-bow');
+            bow.style.transform = 'translate(-50%, -50%) scale(1.15)';
+            setTimeout(() => {
+                if (clickCount < totalGuests) bow.style.transform = 'translate(-50%, -50%) scale(1)';
+            }, 200);
+
+            // 4. Update Ribbon Glow
+            const parts = ['rt', 'rb', 'rl', 'rr'];
+            const intensity = clickCount * 40; // More intense glow per click
+            parts.forEach(p => {
+                document.getElementById(p).style.boxShadow = `0 0 ${intensity}px #fbbf24`;
+            });
+
+            // 5. Check for Final Unveiling
+            const statusText = document.getElementById('click-status');
+            if (clickCount < totalGuests) {
+                statusText.innerText = `First Sanction Granted. Awaiting Second Seal.`;
+            } else {
+                statusText.innerText = `All Seals Released. Unveiling Civerse...`;
+                triggerUntieSequence();
+            }
+        }
+
+        function triggerUntieSequence() {
+            const box = document.getElementById('box-wrapper');
+            const ui = document.getElementById('reveal-UI');
+            const outer = document.getElementById('box-outer');
+            
+            ui.style.opacity = '0';
+            ui.style.transform = 'translateY(-30px) scale(0.95)';
+
+            setTimeout(() => {
+                box.classList.add('untied');
+                setTimeout(() => {
+                    outer.classList.add('untied-final');
+                    setTimeout(() => {
+                        window.location.assign('magazine.html');
+                    }, 4500); 
+                }, 800);
+            }, 800);
+        }
+    </script>
+</body>
+</html>
